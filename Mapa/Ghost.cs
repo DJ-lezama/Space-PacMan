@@ -11,8 +11,7 @@ namespace PacMan
     {
         public Boolean isAlive;
         Random rand = new Random();
-        private float x, y; //Position coordinates
-        private int width = 20, height = 20;
+        public float x, y;
         private int sqr = 20;
 
        public Ghost(float x, float y)
@@ -21,7 +20,6 @@ namespace PacMan
             this.x = x;
             this.y = y;
         }
-
 
         public void AnimGhost(Graphics g, int cntT, Brush ghostColor)
         {
@@ -48,7 +46,6 @@ namespace PacMan
             }
 
             // Eyes
-
             if (((cntT + rand.Next(1, 17)) % 11) == 0)
             {
                 //Close eyes
@@ -64,6 +61,12 @@ namespace PacMan
                 g.FillEllipse(Brushes.Linen, (x * sqr) + 10, (y * sqr) + 2, sqr - 12, sqr - 12);
             }
         }
+
+        public void HandleBeingEaten()
+        {
+
+        }
+
 
     }
 }

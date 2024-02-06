@@ -17,6 +17,7 @@ namespace PacMan
         public Ghost pinkGhost;
         public Ghost blueGhost;
         public Ghost orangeGhost;
+        public List<Ghost> ghosts = new List<Ghost>();
         public int sqr = 20;
         public Canvas(Bitmap bmp)
         {
@@ -52,15 +53,19 @@ namespace PacMan
                     {
                         case 'A':
                             redGhost = new Ghost(x, y);
+                            ghosts.Add(redGhost);
                             break;
                         case 'B':
                             pinkGhost = new Ghost(x, y);
+                            ghosts.Add(pinkGhost);
                             break;
                         case 'C':
                             blueGhost = new Ghost(x, y);
+                            ghosts.Add(blueGhost);
                             break;
                         case 'D':
                             orangeGhost = new Ghost(x, y);
+                            ghosts.Add(orangeGhost);
                             break;
                     }
                     
@@ -95,15 +100,10 @@ namespace PacMan
                 pacman.Anim(g, counter_timer);
             }
 
-            
             redGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Red);
             pinkGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.LightPink);
             blueGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.LightSkyBlue);
             orangeGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Orange);
-            
-
-        }
-
-       
+        } 
     }
 }

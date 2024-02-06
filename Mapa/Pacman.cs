@@ -62,11 +62,8 @@ namespace PacMan
 
         public void Anim(Graphics g, int cntT)
         {
-            //g.Clear(Color.Transparent);
-
             int drawX = X * sqr;
             int drawY = Y * sqr;
-
 
             switch (cntT % 6)
             {
@@ -95,6 +92,11 @@ namespace PacMan
                 g.FillEllipse(Brushes.Black, drawX + sqr / 5, drawY + sqr / 5, sqr / 5, sqr / 5);
             }
         }
+
+       public void HandleBeingEaten()
+       {
+            
+       }
 
     }
 }

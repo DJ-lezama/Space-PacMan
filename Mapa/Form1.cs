@@ -69,9 +69,9 @@ namespace PacMan
                 }
             }
 
-
             timer_counter++;
             canvas.pacman.PacmanMove(canvas.map);
+            canvas.map.GhostCollisions(canvas.pacman, canvas.ghosts);
             canvas.DrawMap(timer_counter);
             LBL_SCORE.Text = "SCORE: " + canvas.map.Score.ToString();
             Refresh();
