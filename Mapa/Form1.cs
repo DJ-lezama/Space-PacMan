@@ -15,6 +15,8 @@ namespace PacMan
         Bitmap bmp;
         Canvas canvas;
         int timer_counter;
+        public int poweredUpDuration;
+        public const int defaultDuration = 100;
 
         public Form1()
         {
@@ -27,6 +29,7 @@ namespace PacMan
             bmp = new Bitmap(PCT_CANVAS.Width, PCT_CANVAS.Height);
             PCT_CANVAS.Image = bmp;
             canvas = new Canvas(bmp);
+            poweredUpDuration = defaultDuration;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -56,6 +59,17 @@ namespace PacMan
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (canvas.pacman.poweredUp)
+            {
+                poweredUpDuration--;
+                if (poweredUpDuration <= 0)
+                {
+                    canvas.pacman.poweredUp = false;
+                    poweredUpDuration = defaultDuration;
+                }
+            }
+
+
             timer_counter++;
             canvas.pacman.PacmanMove(canvas.map);
             canvas.DrawMap(timer_counter);

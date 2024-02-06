@@ -25,6 +25,7 @@ namespace PacMan
 
         public void AnimGhost(Graphics g, int cntT, Brush ghostColor)
         {
+            
             if (isAlive)
             {
                 g.FillEllipse(new SolidBrush(Color.FromArgb(65, 250, 250, 50)), (x * sqr), (y * sqr), sqr, sqr);

@@ -17,13 +17,14 @@ namespace PacMan
         public int Y { get; set; }
         public enum Direction { Up, Down, Left, Right }
         public Direction CurrentDirection { get; set; }
-
+        public Boolean poweredUp;
 
         public Pacman(int startX, int startY, int squareSize)
         {
             this.X = startX;
             this.Y = startY;
             this.sqr = squareSize;
+            this.poweredUp = false;
         }
 
 
@@ -56,7 +57,7 @@ namespace PacMan
             }
 
             // Check and eat the pill or power pellet at the new position.
-            map.EatPillOrPellet(newX, newY);
+            map.EatPillOrPellet(newX, newY, this);
         }
 
         public void Anim(Graphics g, int cntT)

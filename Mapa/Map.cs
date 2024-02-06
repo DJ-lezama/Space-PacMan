@@ -9,6 +9,7 @@ namespace PacMan
     internal class Map
     {
         public char[,] level = new char[,] { };
+        private Pacman pacman;
         
         public Map()
         {
@@ -42,6 +43,11 @@ namespace PacMan
 
         }
 
+        public void SetPacman(Pacman pacman)
+        {
+            this.pacman = pacman;
+        }
+
         // Checks if the specified position is passable (not a wall).
         public bool IsPassable(int x, int y)
         {
@@ -56,7 +62,7 @@ namespace PacMan
 
         public int Score { get; set; } = 0;
 
-        public void EatPillOrPellet(int pacmanX, int pacmanY)
+        public void EatPillOrPellet(int pacmanX, int pacmanY, Pacman pacman)
         {
             if (level[pacmanY, pacmanX] == '1') // Normal pill
             {
@@ -67,10 +73,8 @@ namespace PacMan
             {
                 Score += 50; // Increase score by 50 for power pellet.
                 level[pacmanY, pacmanX] = ' '; // Remove the power pellet from the map.
-
-                //Call method to change ghosts color
-
-                //Call method to ghosts vulnerable
+                pacman.poweredUp = true;
+                
             }
             
 

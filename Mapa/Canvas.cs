@@ -35,6 +35,7 @@ namespace PacMan
                     if (map.level[y, x] == 'P')
                     {
                         pacman = new Pacman(x, y, sqr);
+                        map.SetPacman(pacman);
                         return; 
                     }
                 }
@@ -95,10 +96,10 @@ namespace PacMan
             }
 
             
-            redGhost.AnimGhost(g, counter_timer, Brushes.Red);
-            pinkGhost.AnimGhost(g, counter_timer, Brushes.LightPink);
-            blueGhost.AnimGhost(g, counter_timer, Brushes.LightSkyBlue);
-            orangeGhost.AnimGhost(g, counter_timer, Brushes.Orange);
+            redGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Red);
+            pinkGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.LightPink);
+            blueGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.LightSkyBlue);
+            orangeGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Orange);
             
 
         }
