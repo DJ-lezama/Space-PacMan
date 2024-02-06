@@ -31,39 +31,35 @@ namespace PacMan
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            int deltaX = 0;
-            int deltaY = 0; 
-
+            
             switch (keyData)
             {
                 case Keys.Left:
-                    deltaX -= 1;
+                    canvas.pacman.CurrentDirection = Pacman.Direction.Left;
                     break;
                 case Keys.Right:
-                    deltaX += 1;
+                    canvas.pacman.CurrentDirection = Pacman.Direction.Right;
                     break;
                 case Keys.Up:
-                    deltaY -= 1;
+                    canvas.pacman.CurrentDirection = Pacman.Direction.Up;
                     break;
                 case Keys.Down:
-                    deltaY += 1;
+                    canvas.pacman.CurrentDirection = Pacman.Direction.Down;
                     break;
             }
-
-            canvas.pacman.PacmanMove(deltaX, deltaY, canvas.map);
-            canvas.DrawMap(timer_counter);
 
             this.Refresh();
 
             BTNS_LABEL.Text = keyData.ToString();
-            LBL_SCORE.Text = "SCORE: " + canvas.map.Score.ToString();
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer_counter++;
+            canvas.pacman.PacmanMove(canvas.map);
             canvas.DrawMap(timer_counter);
+            LBL_SCORE.Text = "SCORE: " + canvas.map.Score.ToString();
             Refresh();
         }
 

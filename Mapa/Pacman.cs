@@ -15,6 +15,9 @@ namespace PacMan
         public int sqr = 20;
         public int X { get; set; }
         public int Y { get; set; }
+        public enum Direction { Up, Down, Left, Right }
+        public Direction CurrentDirection { get; set; }
+
 
         public Pacman(int startX, int startY, int squareSize)
         {
@@ -23,10 +26,27 @@ namespace PacMan
             this.sqr = squareSize;
         }
 
-        public void PacmanMove(int deltaX, int deltaY, Map map)
+
+        public void PacmanMove(Map map)
         {
-            int newX = X + deltaX;
-            int newY = Y + deltaY;
+            int newX = X;
+            int newY = Y;
+
+            switch (CurrentDirection)
+            {
+                case Direction.Left:
+                    newX -= 1;
+                    break;
+                case Direction.Right:
+                    newX += 1;
+                    break;
+                case Direction.Up:
+                    newY -= 1;
+                    break;
+                case Direction.Down:
+                    newY += 1;
+                    break;
+            }
 
             // Check if the new position is passable before moving.
             if (map.IsPassable(newX, newY))
