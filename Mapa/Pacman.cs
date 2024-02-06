@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Mapa
+namespace PacMan
 {
     internal class Pacman
     {
@@ -22,12 +22,6 @@ namespace Mapa
             this.Y = startY;
             this.sqr = squareSize;
         }
-
-        public void DrawPacman(Graphics g)
-        {
-            g.FillEllipse(Brushes.Yellow, X * sqr, Y * sqr, sqr, sqr );
-        }
-
 
         public void PacmanMove(int deltaX, int deltaY, Map map)
         {

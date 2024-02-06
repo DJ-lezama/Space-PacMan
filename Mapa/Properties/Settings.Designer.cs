@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mapa.Properties
+namespace PacMan.Properties
 {
 
 
