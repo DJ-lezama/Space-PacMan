@@ -107,7 +107,7 @@ namespace PacMan
                     switch (map.level[y, x])
                     {
                         case '0':
-                            Brick.DrawBrick(g, x, y, sqr);
+                            Brick.DrawLunarBrick(g, x, y, sqr);
                             break;
                         case '1':
                             Pill.DrawPill(g, x, y, sqr, counter_timer);
