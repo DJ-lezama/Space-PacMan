@@ -10,6 +10,7 @@ namespace PacMan
         Bitmap bmp;
         Canvas canvas;
         int timer_counter;
+        private Boolean gameOver;
         public int poweredUpDuration;
         public const int defaultDuration = 100;
 
@@ -25,6 +26,7 @@ namespace PacMan
             PCT_CANVAS.Image = bmp;
             canvas = new Canvas(bmp);
             poweredUpDuration = defaultDuration;
+            gameOver = false;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -50,9 +52,49 @@ namespace PacMan
             BTNS_LABEL.Text = keyData.ToString();
             return base.ProcessCmdKey(ref msg, keyData);
         }
+        
+        private void GameOver()
+        {
+            var result = MessageBox.Show("You Lost! Do you want to play again?", "Game Over", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                ResetGame(); 
+            }
+            else
+            {
+                this.Close(); 
+            }
+        }
 
+        private void WinningGameLogic()
+        {
+            var result = MessageBox.Show("You won! Do you want to play again?", "You won", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                ResetGame(); 
+            }
+            else
+            {
+                this.Close();
+            }
+            
+        }
+
+        private void ResetGame()
+        {
+            
+        }
+        
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (!gameOver && !canvas.map.ArePillsOrPelletsLeft())
+            {
+                gameOver = true;
+                WinningGameLogic();
+                
+            }
+            
             if (canvas.pacman.poweredUp)
             {
                 // Change ghosts mode to Frightened mode
@@ -81,10 +123,10 @@ namespace PacMan
                 canvas.pacman.PacmanMove(canvas.map);
                 canvas.map.GhostCollisions(canvas.pacman, canvas.ghosts);
             }
-            else if (canvas.pacman.lives <= 0 && !canvas.pacman.isAlive)
+            else if (!gameOver && canvas.pacman.lives <= 0 && !canvas.pacman.isAlive)
             {
-                 // Implement Game Over logic here
-
+                gameOver = true;
+                GameOver();
             }
 
             foreach (Ghost ghost in canvas.ghosts){

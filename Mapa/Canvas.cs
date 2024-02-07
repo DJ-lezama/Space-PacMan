@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace PacMan
@@ -83,7 +84,6 @@ namespace PacMan
                             ghosts.Add(orangeGhost);
                             break;
                     }
-                    
                 }
             }
         }
