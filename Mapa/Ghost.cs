@@ -1,10 +1,6 @@
 ﻿using Mapa;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PacMan
 {
@@ -46,32 +42,7 @@ namespace PacMan
             MoveBehaviour.Move(this, map);
         }
         
-        /*
-        public void GhostMove(char[,] level)
-        {
-            if (!isAlive)
-            {
-                // Skip movement if the ghost is not alive
-                return;
-            }
-
-            // Array of possible movement directions
-            (int dx, int dy)[] directions = new (int, int)[] { (0, -1), (0, 1), (-1, 0), (1, 0) };
-            int newIndex = rand.Next(directions.Length); // Randomly select a direction
-            int newX = (int)x + directions[newIndex].Item1;
-            int newY = (int)y + directions[newIndex].Item2;
-
-            // Check if new position is within bounds and not a wall ('0' represents a wall in the level array)
-            if (newX >= 0 && newX < level.GetLength(1) && newY >= 0 && newY < level.GetLength(0) && level[newY, newX] != '0')
-            {
-                x = newX;
-                y = newY;
-            }
-            // If the selected position is not valid, the ghost does not move. This is a simple logic to keep the ghost moving.
-        }
-        */
-        
-        public void AnimGhost(Graphics g, int cntT, Brush ghostColor)
+        public void AnimGhost(Graphics g, int cntT, Brush ghostColor, Map map)
         {
             
             if (isAlive)
@@ -113,7 +84,6 @@ namespace PacMan
             }
             else
             {
-               
                 // Calculate the step towards the initial position
                 float stepX = (initialX - x) * 0.05f; // Adjust the multiplier for speed
                 float stepY = (initialY - y) * 0.05f;
@@ -131,8 +101,14 @@ namespace PacMan
                 // Check if the ghost has reached its initial position to make it alive again
                 if (Math.Abs(x - initialX) < 0.1 && Math.Abs(y - initialY) < 0.1)
                 {
-                    isAlive = true; // Respawn the ghost once it reaches its initial position
+                    x = initialX; // Reset to exact initial position to avoid floating-point imprecision
+                    y = initialY;
+                    if (map.IsPassable((int)x, (int)y))
+                    {
+                        isAlive = true; // Respawn the ghost only if the initial position is passable
+                    }
                 }
+
             }
         }
 

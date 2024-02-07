@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PacMan
 {
@@ -62,41 +56,75 @@ namespace PacMan
             // Check and eat the pill or power pellet at the new position.
             map.EatPillOrPellet(newX, newY, this);
         }
-
         public void Anim(Graphics g, int cntT)
         {
             int drawX = X * sqr;
             int drawY = Y * sqr;
+            int startAngle, sweepAngle;
 
             if (this.isAlive)
             {
-                switch (cntT % 6)
+                // Determine the start angle and sweep angle based on current direction
+                switch (CurrentDirection)
                 {
-                    case 0:
-                        g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
+                    case Direction.Right:
+                        startAngle = 30; // Start drawing from 30 degrees for right movement
+                        sweepAngle = 300; // Sweep 300 degrees
                         break;
-                    case 1:
-                        g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
+                    case Direction.Left:
+                        startAngle = 210; // Start drawing from 210 degrees for left movement
+                        sweepAngle = 300;
                         break;
-                    case 2:
-                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 30, 300);
+                    case Direction.Down:
+                        startAngle = 120; // Start drawing from 120 degrees for up movement
+                        sweepAngle = 300;
                         break;
-                    case 3:
-                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 45, 240);
+                    case Direction.Up:
+                        startAngle = 300; // Start drawing from 300 degrees for down movement
+                        sweepAngle = 300;
                         break;
-                    case 4:
-                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 30, 300);
-                        break;
-                    case 5:
-                        g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
+                    default:
+                        startAngle = 0;
+                        sweepAngle = 360; // Full circle if direction is unknown
                         break;
                 }
 
+                // Adjust drawing based on the animation frame
+                switch (cntT % 6)
+                {
+                    case 0:
+                    case 1:
+                    case 5:
+                        g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
+                        break;
+                    case 2:
+                    case 4:
+                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, startAngle, sweepAngle);
+                        break;
+                    case 3:
+                        // Adjust the start angle and sweep angle for a "mouth open" effect
+                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, startAngle + 15, sweepAngle - 30);
+                        break;
+                }
+
+                // Draw eyes only when Pac-Man is visible and not in the "fully closed mouth" state
                 if (cntT % 6 != 0)
                 {
-                    g.FillEllipse(Brushes.Black, drawX + sqr / 5, drawY + sqr / 5, sqr / 5, sqr / 5);
+                    // Adjust eye position based on direction
+                    int eyeX = drawX + (sqr / 3);
+                    int eyeY = drawY + (sqr / 3);
+                    if (CurrentDirection == Direction.Left || CurrentDirection == Direction.Right)
+                    {
+                        eyeY -= sqr / 8;
+                    }
+                    else if (CurrentDirection == Direction.Up || CurrentDirection == Direction.Down)
+                    {
+                        eyeX -= sqr / 8;
+                    }
+                    g.FillEllipse(Brushes.Black, eyeX, eyeY, sqr / 5, sqr / 5);
                 }
-            } else
+            }
+            else
             {
                 switch ((cntT / 4) % 7)
                 {
@@ -122,8 +150,7 @@ namespace PacMan
                     case 7:
                         g.FillPie(Brushes.DarkSeaGreen, drawX, drawY, sqr, sqr, 65, 0);
                         break;
-                }               
-                
+                }             
             }
         }
 

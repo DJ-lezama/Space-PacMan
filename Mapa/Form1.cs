@@ -29,7 +29,6 @@ namespace PacMan
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            
             switch (keyData)
             {
                 case Keys.Left:
@@ -56,10 +55,23 @@ namespace PacMan
         {
             if (canvas.pacman.poweredUp)
             {
+                // Change ghosts mode to Frightened mode
+                foreach (Ghost ghost in canvas.ghosts)
+                {
+                    ghost.CurrentMode = Ghost.GhostMode.Frightened;
+                }
+                
                 poweredUpDuration--;
                 if (poweredUpDuration <= 0)
                 {
                     canvas.pacman.poweredUp = false;
+                    
+                    // Deactivate Frightened mode
+                    foreach (Ghost ghost in canvas.ghosts)
+                    {
+                        ghost.CurrentMode = Ghost.GhostMode.Chase;
+                    }
+                    
                     poweredUpDuration = defaultDuration;
                 }
             }
@@ -110,8 +122,6 @@ namespace PacMan
                             ghost.PerformMove(canvas.map);
                             break;
                     }
-                    
-                    //ghost.GhostMove(canvas.map.level);
                 }
             }
             
