@@ -62,6 +62,11 @@ namespace PacMan
             }
         }
 
+        public void RespawnGhost()
+        {
+            
+        }
+
         private void InitializeGhosts()
         {
             for (int y = 0; y < map.level.GetLength(0); y++)

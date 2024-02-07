@@ -16,7 +16,7 @@ namespace PacMan
         Canvas canvas;
         int timer_counter;
         public int poweredUpDuration;
-        public const int defaultDuration = 100;
+        public const int defaultDuration = 300;
 
         public Form1()
         {
@@ -80,11 +80,16 @@ namespace PacMan
                  // Implement Game Over logic here
 
             }
-            
 
+            foreach (Ghost ghost in canvas.ghosts){
+                if (ghost.isAlive)
+                {
+                    ghost.GhostMove(canvas.map.level);
+                }
+            }
+            
             canvas.DrawMap(timer_counter++);
             LBL_SCORE.Text = "SCORE: " + canvas.map.Score.ToString();
-            Console.WriteLine("Lives: " + canvas.pacman.lives);
             LBL_LIVES_LEFT.Text = canvas.pacman.lives.ToString();
             Refresh();
         }
