@@ -77,7 +77,8 @@ namespace PacMan
             }
             else if (canvas.pacman.lives <= 0 && !canvas.pacman.isAlive)
             {
-                    // Implement Game Over logic here
+                 // Implement Game Over logic here
+
             }
             
 
