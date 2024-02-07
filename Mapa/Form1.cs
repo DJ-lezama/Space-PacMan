@@ -11,7 +11,7 @@ namespace PacMan
         Canvas canvas;
         int timer_counter;
         public int poweredUpDuration;
-        public const int defaultDuration = 300;
+        public const int defaultDuration = 100;
 
         public Form1()
         {
@@ -82,30 +82,36 @@ namespace PacMan
                     {
                         case Ghost.GhostMode.Scatter:
                             ghost.MoveBehaviour = new ScatterMode();
+                            ghost.PerformMove(canvas.map);
                             break;
                         case Ghost.GhostMode.Chase:
                             switch (ghost.Identifier)
                             {
                                 case "blinky":
                                     ghost.MoveBehaviour = new BlinkyChaseMode();
+                                    ghost.PerformMove(canvas.map);
                                     break;
                                 case "pinky":
                                     ghost.MoveBehaviour = new PinkyChaseMode();
+                                    ghost.PerformMove(canvas.map);
                                     break;
                                 case "inky":
                                     ghost.MoveBehaviour = new InkyChaseMode();
+                                    ghost.PerformMove(canvas.map);
                                     break;
                                 case "clyde":
                                     ghost.MoveBehaviour = new ClydeChaseMode();
+                                    ghost.PerformMove(canvas.map);
                                     break;
                             }
                             break;
                         case Ghost.GhostMode.Frightened:
                             ghost.MoveBehaviour = new FrightenedMode();
+                            ghost.PerformMove(canvas.map);
                             break;
                     }
                     
-                    ghost.GhostMove(canvas.map.level);
+                    //ghost.GhostMove(canvas.map.level);
                 }
             }
             

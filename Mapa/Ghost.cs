@@ -26,6 +26,7 @@ namespace PacMan
         public IMoveBehaviour MoveBehaviour { get; set; }
         public GhostMode CurrentMode { get; set; }
         public string Identifier { get; set; }
+        
 
         public Ghost(float x, float y, String identifier)
         {
@@ -45,6 +46,7 @@ namespace PacMan
             MoveBehaviour.Move(this, map);
         }
         
+        /*
         public void GhostMove(char[,] level)
         {
             if (!isAlive)
@@ -67,8 +69,8 @@ namespace PacMan
             }
             // If the selected position is not valid, the ghost does not move. This is a simple logic to keep the ghost moving.
         }
-
-
+        */
+        
         public void AnimGhost(Graphics g, int cntT, Brush ghostColor)
         {
             

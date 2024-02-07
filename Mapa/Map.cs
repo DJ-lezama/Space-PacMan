@@ -9,7 +9,7 @@ namespace PacMan
     public class Map
     {
         public char[,] level = new char[,] { };
-        private Pacman pacman;
+        public Pacman pacman;
         private Canvas canvas;
         
         public Map()
