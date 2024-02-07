@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapa;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -14,8 +15,19 @@ namespace PacMan
         public float x, y;
         public float initialX, initialY; // Store initial positions
         private int sqr = 20;
+        public enum GhostMode
+        {
+            Scatter,
+            Chase,
+            Frightened
+        }
 
-       public Ghost(float x, float y)
+
+        public IMoveBehaviour MoveBehaviour { get; set; }
+        public GhostMode CurrentMode { get; set; }
+        public string Identifier { get; set; }
+
+        public Ghost(float x, float y, String identifier)
         {
             isAlive = true;
             this.x = x;
@@ -23,8 +35,16 @@ namespace PacMan
 
             this.initialX = x;
             this.initialY = y;
+
+            this.CurrentMode = GhostMode.Chase;
+            this.Identifier = identifier;
         }
 
+        public void PerformMove(Map map)
+        {
+            MoveBehaviour.Move(this, map);
+        }
+        
         public void GhostMove(char[,] level)
         {
             if (!isAlive)
@@ -112,18 +132,11 @@ namespace PacMan
                     isAlive = true; // Respawn the ghost once it reaches its initial position
                 }
             }
-            
-            
         }
-
-        
-
 
         public void HandleBeingEaten()
         {
             this.isAlive = false;
-
-
         }
 
 

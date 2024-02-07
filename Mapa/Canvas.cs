@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
-    internal class Canvas
+    public class Canvas
     {
         public Map map = new Map();
         public Graphics g;
@@ -61,11 +61,7 @@ namespace PacMan
 
             }
         }
-
-        public void RespawnGhost()
-        {
-            
-        }
+        
 
         private void InitializeGhosts()
         {
@@ -76,19 +72,19 @@ namespace PacMan
                     switch (map.level[y, x])
                     {
                         case 'A':
-                            redGhost = new Ghost(x, y);
+                            redGhost = new Ghost(x, y, "blinky");
                             ghosts.Add(redGhost);
                             break;
                         case 'B':
-                            pinkGhost = new Ghost(x, y);
+                            pinkGhost = new Ghost(x, y, "pinky");
                             ghosts.Add(pinkGhost);
                             break;
                         case 'C':
-                            blueGhost = new Ghost(x, y);
+                            blueGhost = new Ghost(x, y, "inky");
                             ghosts.Add(blueGhost);
                             break;
                         case 'D':
-                            orangeGhost = new Ghost(x, y);
+                            orangeGhost = new Ghost(x, y, "clyde");
                             ghosts.Add(orangeGhost);
                             break;
                     }

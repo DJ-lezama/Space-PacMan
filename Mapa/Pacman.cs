@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace PacMan
 {
-    internal class Pacman
+    public class Pacman
     {
         
         public int sqr = 20;
@@ -101,26 +101,26 @@ namespace PacMan
                 switch ((cntT / 4) % 7)
                 {
                     case 0:
-                        g.FillEllipse(Brushes.Gray, drawX, drawY, sqr, sqr);
+                        g.FillEllipse(Brushes.DarkSeaGreen, drawX, drawY, sqr, sqr);
                         break;
                     case 1:
                     case 2:
-                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 30, 300);
+                        g.FillPie(Brushes.DarkSeaGreen, drawX, drawY, sqr, sqr, 30, 300);
                         break;
                     case 3:
-                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 45, 240);
+                        g.FillPie(Brushes.DarkSeaGreen, drawX, drawY, sqr, sqr, 45, 240);
                         break;
                     case 4:
-                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 50, 180);
+                        g.FillPie(Brushes.DarkSeaGreen, drawX, drawY, sqr, sqr, 50, 180);
                         break;
                     case 5:
-                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 55, 120);
+                        g.FillPie(Brushes.DarkSeaGreen, drawX, drawY, sqr, sqr, 55, 120);
                         break;
                     case 6:
-                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 60, 60);
+                        g.FillPie(Brushes.DarkSeaGreen, drawX, drawY, sqr, sqr, 60, 60);
                         break;
                     case 7:
-                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 65, 0);
+                        g.FillPie(Brushes.DarkSeaGreen, drawX, drawY, sqr, sqr, 65, 0);
                         break;
                 }               
                 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
-    internal class Map
+    public class Map
     {
         public char[,] level = new char[,] { };
         private Pacman pacman;

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Mapa;
 
 namespace PacMan
 {
@@ -68,7 +63,6 @@ namespace PacMan
                     poweredUpDuration = defaultDuration;
                 }
             }
-
             
             if (canvas.pacman.isAlive)
             {
@@ -84,6 +78,33 @@ namespace PacMan
             foreach (Ghost ghost in canvas.ghosts){
                 if (ghost.isAlive)
                 {
+                    switch (ghost.CurrentMode)
+                    {
+                        case Ghost.GhostMode.Scatter:
+                            ghost.MoveBehaviour = new ScatterMode();
+                            break;
+                        case Ghost.GhostMode.Chase:
+                            switch (ghost.Identifier)
+                            {
+                                case "blinky":
+                                    ghost.MoveBehaviour = new BlinkyChaseMode();
+                                    break;
+                                case "pinky":
+                                    ghost.MoveBehaviour = new PinkyChaseMode();
+                                    break;
+                                case "inky":
+                                    ghost.MoveBehaviour = new InkyChaseMode();
+                                    break;
+                                case "clyde":
+                                    ghost.MoveBehaviour = new ClydeChaseMode();
+                                    break;
+                            }
+                            break;
+                        case Ghost.GhostMode.Frightened:
+                            ghost.MoveBehaviour = new FrightenedMode();
+                            break;
+                    }
+                    
                     ghost.GhostMove(canvas.map.level);
                 }
             }
