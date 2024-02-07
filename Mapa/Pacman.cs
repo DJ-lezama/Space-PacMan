@@ -18,6 +18,8 @@ namespace PacMan
         public enum Direction { Up, Down, Left, Right }
         public Direction CurrentDirection { get; set; }
         public Boolean poweredUp;
+        public Boolean isAlive;
+        public int lives = 3;
 
         public Pacman(int startX, int startY, int squareSize)
         {
@@ -25,6 +27,7 @@ namespace PacMan
             this.Y = startY;
             this.sqr = squareSize;
             this.poweredUp = false;
+            this.isAlive = true;
         }
 
 
@@ -65,37 +68,69 @@ namespace PacMan
             int drawX = X * sqr;
             int drawY = Y * sqr;
 
-            switch (cntT % 6)
+            if (this.isAlive)
             {
-                case 0:
-                    g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
-                    break;
-                case 1:
-                    g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
-                    break;
-                case 2:
-                    g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 30, 300);
-                    break;
-                case 3:
-                    g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 45, 240);
-                    break;
-                case 4:
-                    g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 30, 300);
-                    break;
-                case 5:
-                    g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
-                    break;
-            }
+                switch (cntT % 6)
+                {
+                    case 0:
+                        g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
+                        break;
+                    case 1:
+                        g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
+                        break;
+                    case 2:
+                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 30, 300);
+                        break;
+                    case 3:
+                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 45, 240);
+                        break;
+                    case 4:
+                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, 30, 300);
+                        break;
+                    case 5:
+                        g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
+                        break;
+                }
 
-            if (cntT % 6 != 0)
+                if (cntT % 6 != 0)
+                {
+                    g.FillEllipse(Brushes.Black, drawX + sqr / 5, drawY + sqr / 5, sqr / 5, sqr / 5);
+                }
+            } else
             {
-                g.FillEllipse(Brushes.Black, drawX + sqr / 5, drawY + sqr / 5, sqr / 5, sqr / 5);
+                switch ((cntT / 4) % 7)
+                {
+                    case 0:
+                        g.FillEllipse(Brushes.Gray, drawX, drawY, sqr, sqr);
+                        break;
+                    case 1:
+                    case 2:
+                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 30, 300);
+                        break;
+                    case 3:
+                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 45, 240);
+                        break;
+                    case 4:
+                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 50, 180);
+                        break;
+                    case 5:
+                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 55, 120);
+                        break;
+                    case 6:
+                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 60, 60);
+                        break;
+                    case 7:
+                        g.FillPie(Brushes.Gray, drawX, drawY, sqr, sqr, 65, 0);
+                        break;
+                }               
+                
             }
         }
 
        public void HandleBeingEaten()
        {
-            
+            this.isAlive = false;
+            this.lives --; //update lives left
        }
 
     }

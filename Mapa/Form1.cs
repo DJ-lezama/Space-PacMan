@@ -69,11 +69,22 @@ namespace PacMan
                 }
             }
 
-            timer_counter++;
-            canvas.pacman.PacmanMove(canvas.map);
-            canvas.map.GhostCollisions(canvas.pacman, canvas.ghosts);
-            canvas.DrawMap(timer_counter);
+            
+            if (canvas.pacman.isAlive)
+            {
+                canvas.pacman.PacmanMove(canvas.map);
+                canvas.map.GhostCollisions(canvas.pacman, canvas.ghosts);
+            }
+            else if (canvas.pacman.lives <= 0 && !canvas.pacman.isAlive)
+            {
+                    // Implement Game Over logic here
+            }
+            
+
+            canvas.DrawMap(timer_counter++);
             LBL_SCORE.Text = "SCORE: " + canvas.map.Score.ToString();
+            Console.WriteLine("Lives: " + canvas.pacman.lives);
+            LBL_LIVES_LEFT.Text = canvas.pacman.lives.ToString();
             Refresh();
         }
 

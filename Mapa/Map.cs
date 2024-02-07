@@ -10,6 +10,7 @@ namespace PacMan
     {
         public char[,] level = new char[,] { };
         private Pacman pacman;
+        private Canvas canvas;
         
         public Map()
         {
@@ -46,6 +47,11 @@ namespace PacMan
         public void SetPacman(Pacman pacman)
         {
             this.pacman = pacman;
+        }
+
+        public void SetCanvas(Canvas canvas)
+        {
+            this.canvas = canvas;
         }
 
         // Checks if the specified position is passable (not a wall).
@@ -91,6 +97,12 @@ namespace PacMan
                     else
                     {
                         pacman.HandleBeingEaten();
+                        if (pacman.lives > 0)
+                        {
+                            pacman.isAlive = true;
+                            canvas.RespawnPacman();
+                        }
+                        
                     }
                 }
             }

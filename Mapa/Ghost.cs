@@ -64,6 +64,7 @@ namespace PacMan
 
         public void HandleBeingEaten()
         {
+            isAlive = false;
 
         }
 

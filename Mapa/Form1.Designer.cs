@@ -33,6 +33,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.BTNS_LABEL = new System.Windows.Forms.Label();
             this.LBL_SCORE = new System.Windows.Forms.Label();
+            this.LBL_LIVES = new System.Windows.Forms.Label();
+            this.LBL_LIVES_LEFT = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,7 +43,7 @@
             this.PCT_CANVAS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PCT_CANVAS.Location = new System.Drawing.Point(47, 64);
             this.PCT_CANVAS.Name = "PCT_CANVAS";
-            this.PCT_CANVAS.Size = new System.Drawing.Size(885, 500);
+            this.PCT_CANVAS.Size = new System.Drawing.Size(880, 500);
             this.PCT_CANVAS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.PCT_CANVAS.TabIndex = 0;
             this.PCT_CANVAS.TabStop = false;
@@ -73,12 +75,33 @@
             this.LBL_SCORE.TabIndex = 2;
             this.LBL_SCORE.Text = "SCORE:";
             // 
+            // LBL_LIVES
+            // 
+            this.LBL_LIVES.AutoSize = true;
+            this.LBL_LIVES.ForeColor = System.Drawing.Color.Snow;
+            this.LBL_LIVES.Location = new System.Drawing.Point(694, 18);
+            this.LBL_LIVES.Name = "LBL_LIVES";
+            this.LBL_LIVES.Size = new System.Drawing.Size(47, 16);
+            this.LBL_LIVES.TabIndex = 3;
+            this.LBL_LIVES.Text = "LIVES:";
+            // 
+            // LBL_LIVES_LEFT
+            // 
+            this.LBL_LIVES_LEFT.AutoSize = true;
+            this.LBL_LIVES_LEFT.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.LBL_LIVES_LEFT.Location = new System.Drawing.Point(747, 18);
+            this.LBL_LIVES_LEFT.Name = "LBL_LIVES_LEFT";
+            this.LBL_LIVES_LEFT.Size = new System.Drawing.Size(0, 16);
+            this.LBL_LIVES_LEFT.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1282, 753);
+            this.Controls.Add(this.LBL_LIVES_LEFT);
+            this.Controls.Add(this.LBL_LIVES);
             this.Controls.Add(this.LBL_SCORE);
             this.Controls.Add(this.BTNS_LABEL);
             this.Controls.Add(this.PCT_CANVAS);
@@ -96,6 +119,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label BTNS_LABEL;
         private System.Windows.Forms.Label LBL_SCORE;
+        private System.Windows.Forms.Label LBL_LIVES;
+        private System.Windows.Forms.Label LBL_LIVES_LEFT;
     }
 }
 

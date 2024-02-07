@@ -26,20 +26,39 @@ namespace PacMan
             InitializeGhosts();
         }
 
-        private void InitializePacman()
+        private (int, int) FindPacmanStartPosition() // Find 'P' in the map to set Pacman's starting position
         {
-            // Find 'P' in the map to set Pacman's starting position
             for (int y = 0; y < map.level.GetLength(0); y++)
             {
                 for (int x = 0; x < map.level.GetLength(1); x++)
                 {
                     if (map.level[y, x] == 'P')
                     {
-                        pacman = new Pacman(x, y, sqr);
-                        map.SetPacman(pacman);
-                        return; 
+                        return (x, y);
                     }
                 }
+            }
+            return (-1, -1); // Default value indicating position not found
+        }
+
+        public void InitializePacman()
+        {
+            int x = FindPacmanStartPosition().Item1;
+            int y = FindPacmanStartPosition().Item2;
+            pacman = new Pacman(x, y, sqr);
+            map.SetPacman(pacman);
+            map.SetCanvas(this);
+            return;
+        }
+
+        public void RespawnPacman()
+        {
+            if (pacman != null && FindPacmanStartPosition() != (-1, -1))
+            {
+                pacman.X = FindPacmanStartPosition().Item1;
+                pacman.Y = FindPacmanStartPosition().Item2;
+                pacman.isAlive = true;
+
             }
         }
 
