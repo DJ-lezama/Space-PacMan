@@ -1,4 +1,6 @@
-﻿using PacMan;
+﻿using System;
+using System.Collections.Generic;
+using PacMan;
 
 namespace Mapa
 {
