@@ -14,20 +14,39 @@ namespace Mapa
         public void Move(Ghost ghost, Map map)
         {
             // set duration to 7 sconds if Scatter mode hasn't happened more than once, otherwise set it to 5 seconds
-            scatterDuration = scatterModeHappenings < 2 ? 240 : 160;//520 : 400; 
+            scatterDuration = scatterModeHappenings < 2 ? 560 : 400;
 
             (int targetX, int targetY) = GetTarget(ghost, map);
 
             //Stay in scatter mode while scatterCounter < scatterDuration and the ghost is not yet at the target
-            if (scatterCounter < scatterDuration & (ghost.x != targetX && ghost.y != targetY))
+            if (scatterCounter < scatterDuration)
             {
                 RetreatToCorner(ghost, map, targetX, targetY);
                 scatterCounter++;
             }
-            else
+            else if (scatterCounter >= scatterDuration || (ghost.x == targetX && ghost.y == targetY))
             {
                 scatterCounter = 0;
                 ghost.CurrentMode = Ghost.GhostMode.Chase;
+                switch (ghost.Identifier)
+                {
+                    case "blinky":
+                        ghost.MoveBehaviour = new BlinkyChaseMode();
+                        ghost.PerformMove(map);
+                        break;
+                    case "pinky":
+                        ghost.MoveBehaviour = new PinkyChaseMode();
+                        ghost.PerformMove(map);
+                        break;
+                    case "inky":
+                        ghost.MoveBehaviour = new InkyChaseMode();
+                        ghost.PerformMove(map);
+                        break;
+                    case "clyde":
+                        ghost.MoveBehaviour = new ClydeChaseMode();
+                        ghost.PerformMove(map);
+                        break;
+                }
                 
             }
         }

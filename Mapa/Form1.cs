@@ -193,24 +193,21 @@ namespace PacMan
             
             
             //Check if its time to activate the Scatter mode 
-            if (timer_counter != 0 && timer_counter % 520 == 0  && canvas.map.CountPillsLeft() > 20) 
+            if (timer_counter != 0 && timer_counter % 560 == 0  && canvas.map.CountPillsLeft() > 20) 
             {
                 // Change ghosts mode to Scatter mode
                 foreach (Ghost ghost in canvas.ghosts)
                 {
-                    if (ghost.MoveBehaviour is ScatterMode scatterModeBehaviour)
+                    if (ghost.CurrentMode != GhostMode.Frightened) //Don't switch to Scatter mode if in Frightened mode
                     {
-                        // Now safe to access ScatterMode properties
-                        scatterModeBehaviour.scatterCounter = 0;
-                        scatterModeBehaviour.scatterModeHappenings++;
-                    }
-                    else if (ghost.CurrentMode != GhostMode.Frightened) //Don't switch to Scatter mode if in Frightened mode
-                    {
-                        ghost.CurrentMode = Ghost.GhostMode.Scatter;
-                        ghost.MoveBehaviour = new ScatterMode();
-                        ((ScatterMode)ghost.MoveBehaviour).scatterCounter = 0;
-                    }
-                    ((ScatterMode)ghost.MoveBehaviour).scatterModeHappenings++;
+                        ghost.CurrentMode = GhostMode.Scatter;
+                        if (ghost.MoveBehaviour is ScatterMode scatterMode)
+                        {
+                            scatterMode.scatterCounter = 0;
+                            scatterMode.scatterModeHappenings++;
+                        }
+                    } 
+                    
                 }
             }
             

@@ -74,18 +74,22 @@ namespace PacMan
                     {
                         case 'A':
                             redGhost = new Ghost(x, y, "blinky", Ghost.Direction.Right);
+                            redGhost.CurrentMode = Ghost.GhostMode.Chase;
                             ghosts.Add(redGhost);
                             break;
                         case 'B':
                             pinkGhost = new Ghost(x, y, "pinky", Ghost.Direction.Right);
+                            pinkGhost.CurrentMode = Ghost.GhostMode.Chase;
                             ghosts.Add(pinkGhost);
                             break;
                         case 'C':
                             blueGhost = new Ghost(x, y, "inky", Ghost.Direction.Left);
+                            blueGhost.CurrentMode = Ghost.GhostMode.Chase;
                             ghosts.Add(blueGhost);
                             break;
                         case 'D':
                             orangeGhost = new Ghost(x, y, "clyde", Ghost.Direction.Left);
+                            orangeGhost.CurrentMode = Ghost.GhostMode.Chase;
                             ghosts.Add(orangeGhost);
                             break;
                     }
