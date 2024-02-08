@@ -88,38 +88,55 @@ namespace PacMan
                         break;
                 }
 
-                // Adjust drawing based on the animation frame
-                switch (cntT % 6)
+                // Platillo volador
+                g.FillEllipse(Brushes.Silver, drawX, drawY + (sqr / 4), sqr, sqr / 2); // Cuerpo principal del platillo
+                g.FillEllipse(Brushes.Gray, drawX + (sqr / 4), drawY, sqr / 2, sqr / 2); // Cúpula en la parte superior
+
+                // Animación del fuego del escape
+                Color fireColor;
+                int fireHeight;
+                switch (cntT % 3)
                 {
                     case 0:
+                        fireColor = Color.Yellow;
+                        fireHeight = sqr / 4; // Fuego pequeño
+                        break;
                     case 1:
-                    case 5:
-                        // Casco cerrado
-                        g.FillEllipse(Brushes.White, drawX, drawY, sqr, sqr);
-                        // Visor como un círculo cuando el casco está cerrado
-                        g.FillEllipse(Brushes.LightSkyBlue, drawX + (sqr / 4), drawY + (sqr / 4), sqr / 2, sqr / 2);
-                        // Reflejo en el visor, ajustado para coincidir con la forma circular
-                        g.FillEllipse(Brushes.LightGray, drawX + (sqr / 3), drawY + (sqr / 3), sqr / 5, sqr / 5);
+                        fireColor = Color.Orange;
+                        fireHeight = sqr / 3; // Fuego mediano
                         break;
                     case 2:
-                    case 4:
-                        // Casco abriendo
-                        g.FillPie(Brushes.White, drawX, drawY, sqr, sqr, startAngle, sweepAngle);
-                        // Visor adaptado al efecto pie, manteniendo la forma previa pero con el efecto "abriendo boca"
-                        g.FillPie(Brushes.LightSkyBlue, drawX + (sqr / 8), drawY + (sqr / 4), 3 * sqr / 4, sqr / 2, startAngle, sweepAngle);
-                        // Reflejo adaptado, ajustado según el tamaño y posición del visor
-                        g.FillPie(Brushes.LightGray, drawX + (2 * sqr / 5), drawY + (sqr / 3), sqr / 5, sqr / 5, startAngle, sweepAngle);
+                        fireColor = Color.Red;
+                        fireHeight = sqr / 2; // Fuego grande
                         break;
-                    case 3:
-                        // Casco más abierto
-                        g.FillPie(Brushes.White, drawX, drawY, sqr, sqr, startAngle + 15, sweepAngle - 30);
-                        // Visor más abierto y ajustado
-                        g.FillPie(Brushes.LightSkyBlue, drawX + (sqr / 8), drawY + (sqr / 4), 3 * sqr / 4, sqr / 2, startAngle + 15, sweepAngle - 30);
-                        // Reflejo más abierto, ajustado según el tamaño y posición del visor
-                        g.FillPie(Brushes.LightGray, drawX + (2 * sqr / 5), drawY + (sqr / 3), sqr / 5, sqr / 5, startAngle + 15, sweepAngle - 30);
+                    default:
+                        fireColor = Color.Yellow;
+                        fireHeight = sqr / 4;
                         break;
                 }
 
+                // Posición y tamaño del fuego
+                int fireX = drawX + sqr / 4;
+                int fireY = drawY + sqr - fireHeight / 3;
+                int fireWidth = sqr / 2;
+
+                // Dibujo del fuego
+                g.FillEllipse(new SolidBrush(fireColor), fireX, fireY, fireWidth, fireHeight);
+
+                // Opcional: Dibujar varias llamas con diferentes colores y tamaños para un efecto más dinámico
+                if ((cntT % 3) == 0)
+                {
+                    g.FillEllipse(Brushes.Orange, fireX + fireWidth / 4, fireY - fireHeight / 4, fireWidth / 2, fireHeight * 2 / 3);
+                }
+                else if ((cntT % 3) == 1)
+                {
+                    g.FillEllipse(Brushes.Red, fireX + fireWidth / 4, fireY - fireHeight / 3, fireWidth / 2, fireHeight * 3 / 4);
+                }
+
+
+                // Opcionalmente, puedes añadir efectos de luces o halos alrededor del platillo para sugerir que está flotando o en movimiento.
+
+                /*
                 // Draw eyes only when Pac-Man is visible and not in the "fully closed mouth" state
                 if (cntT % 6 != 0)
                 {
@@ -136,6 +153,7 @@ namespace PacMan
                     }
                     g.FillEllipse(Brushes.Black, eyeX, eyeY, sqr / 5, sqr / 5);
                 }
+                */
             }
             else
             {
