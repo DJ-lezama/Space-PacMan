@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Mapa;
 using static PacMan.Ghost;
 
@@ -193,23 +194,20 @@ namespace PacMan
             
             
             //Check if its time to activate the Scatter mode 
-            if (timer_counter != 0 && timer_counter % 520 == 0  && canvas.map.CountPillsLeft() > 20) 
+            if (timer_counter != 0 && timer_counter % 560 == 0  && canvas.map.CountPillsLeft() > 20) 
             {
                 // Change ghosts mode to Scatter mode
                 foreach (Ghost ghost in canvas.ghosts)
                 {
                     if (ghost.CurrentMode != GhostMode.Frightened) //Don't switch to Scatter mode if in Frightened mode
                     {
-                        ghost.CurrentMode = Ghost.GhostMode.Scatter;
-                        if (ghost.CurrentMode == Ghost.GhostMode.Scatter)
+                        ghost.CurrentMode = GhostMode.Scatter;
+                        if (ghost.MoveBehaviour is ScatterMode scatterMode)
                         {
-                            ghost.MoveBehaviour = new ScatterMode();
-                            ((ScatterMode)ghost.MoveBehaviour).scatterCounter = 0;
-                            ((ScatterMode)ghost.MoveBehaviour).scatterModeHappenings++;
-                            
+                            scatterMode.scatterCounter = 0;
+                            scatterMode.scatterModeHappenings++;
                         }
-                        
-                    }
+                    } 
                 }
             }
             
@@ -235,6 +233,7 @@ namespace PacMan
                         break;
                 }
             }
+            LBL_TIMER_TICK.Text = "TIMER TICK: " + timer_counter;
             Refresh();
         }
     }

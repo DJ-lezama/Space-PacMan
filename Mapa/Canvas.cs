@@ -74,18 +74,22 @@ namespace PacMan
                     {
                         case 'A':
                             redGhost = new Ghost(x, y, "blinky", Ghost.Direction.Right);
+                            redGhost.CurrentMode = Ghost.GhostMode.Chase;
                             ghosts.Add(redGhost);
                             break;
                         case 'B':
                             pinkGhost = new Ghost(x, y, "pinky", Ghost.Direction.Right);
+                            pinkGhost.CurrentMode = Ghost.GhostMode.Chase;
                             ghosts.Add(pinkGhost);
                             break;
                         case 'C':
                             blueGhost = new Ghost(x, y, "inky", Ghost.Direction.Left);
+                            blueGhost.CurrentMode = Ghost.GhostMode.Chase;
                             ghosts.Add(blueGhost);
                             break;
                         case 'D':
                             orangeGhost = new Ghost(x, y, "clyde", Ghost.Direction.Left);
+                            orangeGhost.CurrentMode = Ghost.GhostMode.Chase;
                             ghosts.Add(orangeGhost);
                             break;
                     }
@@ -120,10 +124,10 @@ namespace PacMan
                 pacman.Anim(g, counter_timer);
             }
 
-            redGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Red, map);
-            pinkGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.LightPink, map);
-            blueGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.LightSkyBlue, map);
-            orangeGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Orange, map);
+            redGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Crimson, map);
+            pinkGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Thistle, map);
+            blueGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.DeepSkyBlue, map);
+            orangeGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Coral, map);
         } 
     }
 }
