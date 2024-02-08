@@ -17,17 +17,18 @@ namespace Mapa
             scatterDuration = scatterModeHappenings < 2 ? 560 : 400;
 
             (int targetX, int targetY) = GetTarget(ghost, map);
-
-            //Stay in scatter mode while scatterCounter < scatterDuration and the ghost is not yet at the target
+            
             if (scatterCounter < scatterDuration)
             {
                 RetreatToCorner(ghost, map, targetX, targetY);
                 scatterCounter++;
             }
+            //Change from scatter mode if the counter is grater or equal than duration or the ghost has reached its target
             else if (scatterCounter >= scatterDuration || (ghost.x == targetX && ghost.y == targetY))
             {
                 scatterCounter = 0;
                 ghost.CurrentMode = Ghost.GhostMode.Chase;
+                /*
                 switch (ghost.Identifier)
                 {
                     case "blinky":
@@ -47,6 +48,7 @@ namespace Mapa
                         ghost.PerformMove(map);
                         break;
                 }
+                */
                 
             }
         }

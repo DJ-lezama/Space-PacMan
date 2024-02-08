@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Mapa;
 using static PacMan.Ghost;
 
@@ -193,7 +194,7 @@ namespace PacMan
             
             
             //Check if its time to activate the Scatter mode 
-            if (timer_counter != 0 && timer_counter % 560 == 0  && canvas.map.CountPillsLeft() > 20) 
+            if (timer_counter != 0 && timer_counter % 240 == 0  && canvas.map.CountPillsLeft() > 20) 
             {
                 // Change ghosts mode to Scatter mode
                 foreach (Ghost ghost in canvas.ghosts)
@@ -207,7 +208,6 @@ namespace PacMan
                             scatterMode.scatterModeHappenings++;
                         }
                     } 
-                    
                 }
             }
             
