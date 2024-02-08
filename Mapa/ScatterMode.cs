@@ -14,11 +14,14 @@ namespace Mapa
         public void Move(Ghost ghost, Map map)
         {
             // set duration to 7 sconds if Scatter mode hasn't happened more than once, otherwise set it to 5 seconds
-            scatterDuration = scatterModeHappenings < 2 ? 520 : 400; 
+            scatterDuration = scatterModeHappenings < 2 ? 240 : 160;//520 : 400; 
 
-            if (scatterCounter < scatterDuration)
+            (int targetX, int targetY) = GetTarget(ghost, map);
+
+            //Stay in scatter mode while scatterCounter < scatterDuration and the ghost is not yet at the target
+            if (scatterCounter < scatterDuration & (ghost.x != targetX && ghost.y != targetY))
             {
-                RetreatToCorner(ghost, map);
+                RetreatToCorner(ghost, map, targetX, targetY);
                 scatterCounter++;
             }
             else
@@ -28,7 +31,7 @@ namespace Mapa
             }
         }
 
-        public void RetreatToCorner(Ghost ghost, Map map)
+        public (int, int) GetTarget(Ghost ghost, Map map)
         {
             switch (ghost.Identifier)
             {
@@ -45,8 +48,13 @@ namespace Mapa
                     target = 'O';
                     break;
             }
-
             (int targetX, int targetY) = map.SearchTarget(target);
+            return (targetX, targetY);
+        }
+
+        public void RetreatToCorner(Ghost ghost, Map map, int targetX, int targetY)
+        {
+            
             
             // Potential new positions
             int newX = (int)ghost.x;

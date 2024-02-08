@@ -198,18 +198,19 @@ namespace PacMan
                 // Change ghosts mode to Scatter mode
                 foreach (Ghost ghost in canvas.ghosts)
                 {
-                    if (ghost.CurrentMode != GhostMode.Frightened) //Don't switch to Scatter mode if in Frightened mode
+                    if (ghost.MoveBehaviour is ScatterMode scatterModeBehaviour)
+                    {
+                        // Now safe to access ScatterMode properties
+                        scatterModeBehaviour.scatterCounter = 0;
+                        scatterModeBehaviour.scatterModeHappenings++;
+                    }
+                    else if (ghost.CurrentMode != GhostMode.Frightened) //Don't switch to Scatter mode if in Frightened mode
                     {
                         ghost.CurrentMode = Ghost.GhostMode.Scatter;
-                        if (ghost.CurrentMode == Ghost.GhostMode.Scatter)
-                        {
-                            ghost.MoveBehaviour = new ScatterMode();
-                            ((ScatterMode)ghost.MoveBehaviour).scatterCounter = 0;
-                            ((ScatterMode)ghost.MoveBehaviour).scatterModeHappenings++;
-                            
-                        }
-                        
+                        ghost.MoveBehaviour = new ScatterMode();
+                        ((ScatterMode)ghost.MoveBehaviour).scatterCounter = 0;
                     }
+                    ((ScatterMode)ghost.MoveBehaviour).scatterModeHappenings++;
                 }
             }
             
