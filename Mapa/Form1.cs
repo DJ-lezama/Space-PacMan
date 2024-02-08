@@ -14,7 +14,7 @@ namespace PacMan
         private Boolean gameOver;
         public int poweredUpDuration;
         public const int defaultDuration = 100;
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -99,8 +99,7 @@ namespace PacMan
             {
                 ghost.CurrentMode = Ghost.GhostMode.Chase;
             }
-
-
+            
             canvas.map.Score = 0;
             canvas.pacman.poweredUp = false;
             gameOver = false;
@@ -125,6 +124,7 @@ namespace PacMan
                 }
                 
                 poweredUpDuration--;
+                
                 if (poweredUpDuration <= 0)
                 {
                     //Deactivate Pacman powered up mode
@@ -191,11 +191,51 @@ namespace PacMan
                 }
             }
             
+            
+            //Check if its time to activate the Scatter mode 
+            if (timer_counter != 0 && timer_counter % 520 == 0  && canvas.map.CountPillsLeft() > 20) 
+            {
+                // Change ghosts mode to Scatter mode
+                foreach (Ghost ghost in canvas.ghosts)
+                {
+                    if (ghost.CurrentMode != GhostMode.Frightened) //Don't switch to Scatter mode if in Frightened mode
+                    {
+                        ghost.CurrentMode = Ghost.GhostMode.Scatter;
+                        if (ghost.CurrentMode == Ghost.GhostMode.Scatter)
+                        {
+                            ghost.MoveBehaviour = new ScatterMode();
+                            ((ScatterMode)ghost.MoveBehaviour).scatterCounter = 0;
+                            ((ScatterMode)ghost.MoveBehaviour).scatterModeHappenings++;
+                            
+                        }
+                        
+                    }
+                }
+            }
+            
+            
             canvas.DrawMap(timer_counter++);
             LBL_SCORE.Text = "SCORE: " + canvas.map.Score.ToString();
             LBL_LIVES_LEFT.Text = canvas.pacman.lives.ToString();
+            foreach(Ghost ghost in canvas.ghosts)
+            {
+                switch (ghost.Identifier)
+                {
+                    case "blinky":
+                        LBL_GHOST_MODE_BLINKY.Text = "Blinky: " + ghost.CurrentMode.ToString();
+                        break;
+                    case "pinky":
+                        LBL_GHOST_MODE_PINKY.Text = "Pinky: " + ghost.CurrentMode.ToString();
+                        break;
+                    case "inky":
+                        LBL_GHOST_MODE_INKY.Text = "Inky: " + ghost.CurrentMode.ToString();
+                        break;
+                    case "clyde":
+                        LBL_GHOTS_MODE_CLYDE.Text = "Clyde: " + ghost.CurrentMode.ToString();
+                        break;
+                }
+            }
             Refresh();
         }
-
     }
 }
