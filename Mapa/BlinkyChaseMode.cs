@@ -12,11 +12,11 @@ namespace Mapa
         public Ghost g;
         public Map m;
         public PointF p, gh;
+        Search s;
 
         public void Move(Ghost ghost, Map map)
         {
             g = ghost;
-            m = map;
 
             // Access Pacman's position through the map
             p = new PointF (map.pacman.X, map.pacman.Y);
@@ -39,21 +39,7 @@ namespace Mapa
                     break;
             }
 
-            var path = AStarSearch(map, gh, p);
-
-            // Move to the next step in the path if it exists
-            if (path.Any())
-            {
-                gh = path.First();
-            }
-        }
-
-        private AStarSearch(Map map, PointF start, PointF goal)
-        {
-            // This function should implement the A* algorithm to find the shortest path
-            // from start to goal. For simplicity, this example will just return an empty list.
-            // You'll need to fill in the actual A* logic here.
-            return;
+            s = new Search(map);
         }
     }
 }

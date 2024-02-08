@@ -61,12 +61,14 @@
     <Compile Include="IMoveBehaviour.cs" />
     <Compile Include="InkyChaseMode.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="Node.cs" />
     <Compile Include="Pacman.cs" />
     <Compile Include="Pill.cs" />
     <Compile Include="PinkyChaseMode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScatterMode.cs" />
+    <Compile Include="Search.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
