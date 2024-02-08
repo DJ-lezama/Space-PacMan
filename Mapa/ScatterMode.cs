@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using PacMan;
 
@@ -54,35 +55,42 @@ namespace Mapa
 
         public void RetreatToCorner(Ghost ghost, Map map, int targetX, int targetY)
         {
-            // Potential new positions
-            int newX = (int)ghost.x;
-            int newY = (int)ghost.y;
+            
+            // Calculate the current deltaX and deltaY between the ghost and Pacman
+            int currentDeltaX = Math.Abs(targetX - (int)ghost.x);
+            int currentDeltaY = Math.Abs(targetY - (int)ghost.y);
 
-            // Calculate the difference in positions
-            int diffX = targetX - newX;
-            int diffY = targetY - newY;
+            // Possible moves based on the ghost's current direction
+            List<(int x, int y)> possibleMoves = new List<(int x, int y)>();
 
-            // Decide on move based on which difference is greater and check for walls
-            if (Math.Abs(diffX) > Math.Abs(diffY))
+            // Add all possible moves
+            if (map.IsPassable((int)ghost.x - 1, (int)ghost.y)) possibleMoves.Add(((int)ghost.x - 1, (int)ghost.y)); // Left
+            if (map.IsPassable((int)ghost.x + 1, (int)ghost.y)) possibleMoves.Add(((int)ghost.x + 1, (int)ghost.y)); // Right
+            if (map.IsPassable((int)ghost.x, (int)ghost.y - 1)) possibleMoves.Add(((int)ghost.x, (int)ghost.y - 1)); // Up
+            if (map.IsPassable((int)ghost.x, (int)ghost.y + 1)) possibleMoves.Add(((int)ghost.x, (int)ghost.y + 1)); // Down
+
+            // Initialize variables to track the best move
+            (int x, int y) bestMove = ((int)ghost.x, (int)ghost.y);
+            int bestDelta = currentDeltaX + currentDeltaY; // Combined delta as a simple heuristic
+
+            // Evaluate each possible move
+            foreach (var move in possibleMoves)
             {
-                // Attempt to move in X direction if no wall is present
-                if (map.IsPassable(newX + Math.Sign(diffX), newY))
+                int newDeltaX = Math.Abs(targetX - move.x);
+                int newDeltaY = Math.Abs(targetY - move.y);
+                int newCombinedDelta = newDeltaX + newDeltaY;
+
+                // Choose the move that decreases the delta (gets closer to Pacman)
+                if (newCombinedDelta <= bestDelta)
                 {
-                    newX += Math.Sign(diffX);
+                    bestDelta = newCombinedDelta;
+                    bestMove = move;
                 }
             }
-            else
-            {
-                // Attempt to move in Y direction if no wall is present
-                if (map.IsPassable(newX, newY + Math.Sign(diffY)))
-                {
-                    newY += Math.Sign(diffY);
-                }
-            }
 
-            // Update ghost's position if the move is valid
-            ghost.x = newX;
-            ghost.y = newY;
+            // Move the ghost to the position that brings it closer (or keeps it the same distance) to Pacman
+            ghost.x = bestMove.x;
+            ghost.y = bestMove.y;
         }
     }
 }
