@@ -11,6 +11,7 @@ namespace PacMan
         public float x, y;
         public float initialX, initialY; // Store initial positions
         private int sqr = 20;
+        Brush brush = new SolidBrush(Color.FromArgb(255, 192, 203));
         public enum Direction { Up, Down, Left, Right }
         public Direction direction;
 
@@ -51,23 +52,25 @@ namespace PacMan
             
             if (isAlive)
             {
-                //g.FillEllipse(new SolidBrush(Color.FromArgb(65, 250, 250, 50)), (x * sqr), (y * sqr), sqr, sqr);
+                g.FillEllipse(new SolidBrush(Color.FromArgb(65, 250, 250, 50)), (x * sqr), (y * sqr), sqr, sqr);
                 g.FillEllipse(ghostColor, (x * sqr) + 2, (y * sqr) - 2, sqr - 4, sqr - 6);
                 g.FillRectangle(ghostColor, (x * sqr) + 2, (y * sqr) + 2, sqr - 4, sqr - 8);
 
-                if (((cntT + rand.Next(1, 7)) % 3) == 0){
+                if (((cntT + rand.Next(1, 7)) % 3) == 0)
+                {
                     g.FillEllipse(ghostColor, (x * sqr), (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (2 * sqr) / 7, (y * sqr) + ( 3 * sqr) / 6, sqr / 5, sqr / 2);
+                    g.FillEllipse(ghostColor, (x * sqr) + (2 * sqr) / 7, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
                     g.FillEllipse(ghostColor, (x * sqr) + (4 * sqr) / 7, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
                     g.FillEllipse(ghostColor, (x * sqr) + (6 * sqr) / 7, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                } else
-                {
-                    g.FillEllipse(ghostColor, (x * sqr) + (sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (2 + sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (4 + sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (6 + sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-
                 }
+                else
+                {
+                    g.FillEllipse(ghostColor, (x * sqr) + sqr / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
+                    g.FillEllipse(ghostColor, (x * sqr) + (2 * sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
+                    g.FillEllipse(ghostColor, (x * sqr) + (4 * sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
+                    g.FillEllipse(ghostColor, (x * sqr) + (6 * sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
+                }
+
                 // Eyes
                 if (((cntT + rand.Next(1, 17)) % 11) == 0)
                 {
