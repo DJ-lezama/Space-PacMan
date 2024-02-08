@@ -63,30 +63,6 @@ namespace PacMan
 
             if (this.isAlive)
             {
-                // Determine the start angle and sweep angle based on current direction
-                switch (CurrentDirection)
-                {
-                    case Direction.Right:
-                        startAngle = 30; // Start drawing from 30 degrees for right movement
-                        sweepAngle = 300; // Sweep 300 degrees
-                        break;
-                    case Direction.Left:
-                        startAngle = 210; // Start drawing from 210 degrees for left movement
-                        sweepAngle = 300;
-                        break;
-                    case Direction.Down:
-                        startAngle = 120; // Start drawing from 120 degrees for up movement
-                        sweepAngle = 300;
-                        break;
-                    case Direction.Up:
-                        startAngle = 300; // Start drawing from 300 degrees for down movement
-                        sweepAngle = 300;
-                        break;
-                    default:
-                        startAngle = 0;
-                        sweepAngle = 360; // Full circle if direction is unknown
-                        break;
-                }
 
                 // Platillo volador
                 g.FillEllipse(Brushes.Silver, drawX, drawY + (sqr / 4), sqr, sqr / 2); // Cuerpo principal del platillo
@@ -98,19 +74,19 @@ namespace PacMan
                 switch (cntT % 3)
                 {
                     case 0:
-                        fireColor = Color.Yellow;
+                        fireColor = Color.GreenYellow;
                         fireHeight = sqr / 4; // Fuego pequeño
                         break;
                     case 1:
-                        fireColor = Color.Orange;
+                        fireColor = Color.Green;
                         fireHeight = sqr / 3; // Fuego mediano
                         break;
                     case 2:
-                        fireColor = Color.Red;
+                        fireColor = Color.DarkGreen;
                         fireHeight = sqr / 2; // Fuego grande
                         break;
                     default:
-                        fireColor = Color.Yellow;
+                        fireColor = Color.GreenYellow;
                         fireHeight = sqr / 4;
                         break;
                 }
@@ -126,34 +102,13 @@ namespace PacMan
                 // Opcional: Dibujar varias llamas con diferentes colores y tamaños para un efecto más dinámico
                 if ((cntT % 3) == 0)
                 {
-                    g.FillEllipse(Brushes.Orange, fireX + fireWidth / 4, fireY - fireHeight / 4, fireWidth / 2, fireHeight * 2 / 3);
+                    g.FillEllipse(Brushes.Green, fireX + fireWidth / 4, fireY - fireHeight / 4, fireWidth / 2, fireHeight * 2 / 3);
                 }
                 else if ((cntT % 3) == 1)
                 {
-                    g.FillEllipse(Brushes.Red, fireX + fireWidth / 4, fireY - fireHeight / 3, fireWidth / 2, fireHeight * 3 / 4);
+                    g.FillEllipse(Brushes.DarkGreen, fireX + fireWidth / 4, fireY - fireHeight / 3, fireWidth / 2, fireHeight * 3 / 4);
                 }
 
-
-                // Opcionalmente, puedes añadir efectos de luces o halos alrededor del platillo para sugerir que está flotando o en movimiento.
-
-                /*
-                // Draw eyes only when Pac-Man is visible and not in the "fully closed mouth" state
-                if (cntT % 6 != 0)
-                {
-                    // Adjust eye position based on direction
-                    int eyeX = drawX + (sqr / 3);
-                    int eyeY = drawY + (sqr / 3);
-                    if (CurrentDirection == Direction.Left || CurrentDirection == Direction.Right)
-                    {
-                        eyeY -= sqr / 8;
-                    }
-                    else if (CurrentDirection == Direction.Up || CurrentDirection == Direction.Down)
-                    {
-                        eyeX -= sqr / 8;
-                    }
-                    g.FillEllipse(Brushes.Black, eyeX, eyeY, sqr / 5, sqr / 5);
-                }
-                */
             }
             else
             {
