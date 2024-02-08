@@ -233,12 +233,9 @@ namespace PacMan
                     case "clyde":
                         LBL_GHOTS_MODE_CLYDE.Text = "Clyde: " + ghost.CurrentMode.ToString();
                         break;
-
                 }
-                
             }
             Refresh();
         }
-
     }
 }
