@@ -52,24 +52,35 @@ namespace PacMan
             
             if (isAlive)
             {
-                g.FillEllipse(new SolidBrush(Color.FromArgb(65, 250, 250, 50)), (x * sqr), (y * sqr), sqr, sqr);
-                g.FillEllipse(ghostColor, (x * sqr) + 2, (y * sqr) - 2, sqr - 4, sqr - 6);
-                g.FillRectangle(ghostColor, (x * sqr) + 2, (y * sqr) + 2, sqr - 4, sqr - 8);
+                // Cuerpo del alien
+                g.FillEllipse(new SolidBrush(Color.FromArgb(65, 250, 250, 50)), (x * sqr), (y * sqr), sqr, sqr); // Aura alrededor del alien
+                g.FillEllipse(ghostColor, (x * sqr) + 2, (y * sqr) - 2, sqr - 4, sqr - 6); // Cabeza del alien
+                g.FillRectangle(ghostColor, (x * sqr) + 2, (y * sqr) + 2, sqr - 4, sqr / 2 - 4); // Cuerpo del alien
 
+                // Antenas que se mueven
+                // Decidir la posición de las antenas basadas en el contador de tiempo para simular movimiento
+                int antenaOffset = ((cntT + rand.Next(1, 7)) % 3) == 0 ? sqr / 4 : sqr / 8;
+                g.DrawLine(new Pen(ghostColor, 2), (x * sqr) + (sqr / 4), (y * sqr), (x * sqr) + (sqr / 4) - antenaOffset, (y * sqr) - antenaOffset); // Antena izquierda
+                g.DrawLine(new Pen(ghostColor, 2), (x * sqr) + (3 * sqr / 4), (y * sqr), (x * sqr) + (3 * sqr / 4) + antenaOffset, (y * sqr) - antenaOffset); // Antena derecha
+
+                // "Piernas" que se mueven
                 if (((cntT + rand.Next(1, 7)) % 3) == 0)
                 {
-                    g.FillEllipse(ghostColor, (x * sqr), (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (2 * sqr) / 7, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (4 * sqr) / 7, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (6 * sqr) / 7, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
+                    // "Piernas" en una posición
+                    g.FillEllipse(ghostColor, (x * sqr), (y * sqr) + sqr - 8, sqr / 5, sqr / 5);
+                    g.FillEllipse(ghostColor, (x * sqr) + (2 * sqr) / 7, (y * sqr) + sqr - 8, sqr / 5, sqr / 5);
+                    g.FillEllipse(ghostColor, (x * sqr) + (4 * sqr) / 7, (y * sqr) + sqr - 8, sqr / 5, sqr / 5);
+                    g.FillEllipse(ghostColor, (x * sqr) + (6 * sqr) / 7, (y * sqr) + sqr - 8, sqr / 5, sqr / 5);
                 }
                 else
                 {
-                    g.FillEllipse(ghostColor, (x * sqr) + sqr / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (2 * sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (4 * sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
-                    g.FillEllipse(ghostColor, (x * sqr) + (6 * sqr) / 8, (y * sqr) + (3 * sqr) / 6, sqr / 5, sqr / 2);
+                    // "Piernas" en otra posición
+                    g.FillEllipse(ghostColor, (x * sqr) + sqr / 8, (y * sqr) + sqr - 8, sqr / 5, sqr / 5);
+                    g.FillEllipse(ghostColor, (x * sqr) + (3 * sqr) / 8, (y * sqr) + sqr - 8, sqr / 5, sqr / 5);
+                    g.FillEllipse(ghostColor, (x * sqr) + (5 * sqr) / 8, (y * sqr) + sqr - 8, sqr / 5, sqr / 5);
+                    g.FillEllipse(ghostColor, (x * sqr) + (7 * sqr) / 8, (y * sqr) + sqr - 8, sqr / 5, sqr / 5);
                 }
+
 
                 // Eyes
                 if (((cntT + rand.Next(1, 17)) % 11) == 0)
