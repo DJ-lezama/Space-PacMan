@@ -39,18 +39,18 @@ namespace PacMan
         public void SetMap(Map newMap)
         {
             this.map = newMap;
+            map.SetCanvas(this); 
             InitializePacman();
             InitializeGhosts();
-            map.SetCanvas(this); 
         }
 
         public void InitializePacman()
         {
+            map.SetCanvas(this);
             int x = FindPacmanStartPosition().Item1;
             int y = FindPacmanStartPosition().Item2;
             pacman = new Pacman(x, y, sqr);
             map.SetPacman(pacman);
-            map.SetCanvas(this);
             return;
         }
 

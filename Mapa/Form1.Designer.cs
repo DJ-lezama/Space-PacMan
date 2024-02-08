@@ -35,6 +35,10 @@
             this.LBL_SCORE = new System.Windows.Forms.Label();
             this.LBL_LIVES = new System.Windows.Forms.Label();
             this.LBL_LIVES_LEFT = new System.Windows.Forms.Label();
+            this.LBL_GHOST_MODE_BLINKY = new System.Windows.Forms.Label();
+            this.LBL_GHOST_MODE_PINKY = new System.Windows.Forms.Label();
+            this.LBL_GHOTS_MODE_CLYDE = new System.Windows.Forms.Label();
+            this.LBL_GHOST_MODE_INKY = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +85,7 @@
             this.LBL_LIVES.AutoSize = true;
             this.LBL_LIVES.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.LBL_LIVES.ForeColor = System.Drawing.Color.Snow;
-            this.LBL_LIVES.Location = new System.Drawing.Point(666, 28);
+            this.LBL_LIVES.Location = new System.Drawing.Point(398, 28);
             this.LBL_LIVES.Name = "LBL_LIVES";
             this.LBL_LIVES.Size = new System.Drawing.Size(81, 26);
             this.LBL_LIVES.TabIndex = 3;
@@ -92,10 +96,50 @@
             this.LBL_LIVES_LEFT.AutoSize = true;
             this.LBL_LIVES_LEFT.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.LBL_LIVES_LEFT.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.LBL_LIVES_LEFT.Location = new System.Drawing.Point(747, 28);
+            this.LBL_LIVES_LEFT.Location = new System.Drawing.Point(479, 28);
             this.LBL_LIVES_LEFT.Name = "LBL_LIVES_LEFT";
             this.LBL_LIVES_LEFT.Size = new System.Drawing.Size(0, 26);
             this.LBL_LIVES_LEFT.TabIndex = 4;
+            // 
+            // LBL_GHOST_MODE_BLINKY
+            // 
+            this.LBL_GHOST_MODE_BLINKY.AutoSize = true;
+            this.LBL_GHOST_MODE_BLINKY.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LBL_GHOST_MODE_BLINKY.Location = new System.Drawing.Point(629, 28);
+            this.LBL_GHOST_MODE_BLINKY.Name = "LBL_GHOST_MODE_BLINKY";
+            this.LBL_GHOST_MODE_BLINKY.Size = new System.Drawing.Size(44, 16);
+            this.LBL_GHOST_MODE_BLINKY.TabIndex = 5;
+            this.LBL_GHOST_MODE_BLINKY.Text = "label1";
+            // 
+            // LBL_GHOST_MODE_PINKY
+            // 
+            this.LBL_GHOST_MODE_PINKY.AutoSize = true;
+            this.LBL_GHOST_MODE_PINKY.ForeColor = System.Drawing.SystemColors.Control;
+            this.LBL_GHOST_MODE_PINKY.Location = new System.Drawing.Point(728, 28);
+            this.LBL_GHOST_MODE_PINKY.Name = "LBL_GHOST_MODE_PINKY";
+            this.LBL_GHOST_MODE_PINKY.Size = new System.Drawing.Size(44, 16);
+            this.LBL_GHOST_MODE_PINKY.TabIndex = 6;
+            this.LBL_GHOST_MODE_PINKY.Text = "label1";
+            // 
+            // LBL_GHOTS_MODE_CLYDE
+            // 
+            this.LBL_GHOTS_MODE_CLYDE.AutoSize = true;
+            this.LBL_GHOTS_MODE_CLYDE.ForeColor = System.Drawing.SystemColors.Control;
+            this.LBL_GHOTS_MODE_CLYDE.Location = new System.Drawing.Point(829, 28);
+            this.LBL_GHOTS_MODE_CLYDE.Name = "LBL_GHOTS_MODE_CLYDE";
+            this.LBL_GHOTS_MODE_CLYDE.Size = new System.Drawing.Size(44, 16);
+            this.LBL_GHOTS_MODE_CLYDE.TabIndex = 7;
+            this.LBL_GHOTS_MODE_CLYDE.Text = "label1";
+            // 
+            // LBL_GHOST_MODE_INKY
+            // 
+            this.LBL_GHOST_MODE_INKY.AutoSize = true;
+            this.LBL_GHOST_MODE_INKY.ForeColor = System.Drawing.SystemColors.Control;
+            this.LBL_GHOST_MODE_INKY.Location = new System.Drawing.Point(922, 28);
+            this.LBL_GHOST_MODE_INKY.Name = "LBL_GHOST_MODE_INKY";
+            this.LBL_GHOST_MODE_INKY.Size = new System.Drawing.Size(44, 16);
+            this.LBL_GHOST_MODE_INKY.TabIndex = 8;
+            this.LBL_GHOST_MODE_INKY.Text = "label1";
             // 
             // Form1
             // 
@@ -103,6 +147,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1282, 753);
+            this.Controls.Add(this.LBL_GHOST_MODE_INKY);
+            this.Controls.Add(this.LBL_GHOTS_MODE_CLYDE);
+            this.Controls.Add(this.LBL_GHOST_MODE_PINKY);
+            this.Controls.Add(this.LBL_GHOST_MODE_BLINKY);
             this.Controls.Add(this.LBL_LIVES_LEFT);
             this.Controls.Add(this.LBL_LIVES);
             this.Controls.Add(this.LBL_SCORE);
@@ -124,6 +172,10 @@
         private System.Windows.Forms.Label LBL_SCORE;
         private System.Windows.Forms.Label LBL_LIVES;
         private System.Windows.Forms.Label LBL_LIVES_LEFT;
+        private System.Windows.Forms.Label LBL_GHOST_MODE_BLINKY;
+        private System.Windows.Forms.Label LBL_GHOST_MODE_PINKY;
+        private System.Windows.Forms.Label LBL_GHOTS_MODE_CLYDE;
+        private System.Windows.Forms.Label LBL_GHOST_MODE_INKY;
     }
 }
 
