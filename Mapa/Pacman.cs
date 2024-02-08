@@ -24,7 +24,6 @@ namespace PacMan
             this.isAlive = true;
         }
 
-
         public void PacmanMove(Map map)
         {
             int newX = X;
