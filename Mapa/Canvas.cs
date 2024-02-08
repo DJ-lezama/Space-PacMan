@@ -36,6 +36,13 @@ namespace PacMan
             }
             return (-1, -1); // Default value indicating position not found
         }
+        public void SetMap(Map newMap)
+        {
+            this.map = newMap;
+            InitializePacman();
+            InitializeGhosts();
+            map.SetCanvas(this); 
+        }
 
         public void InitializePacman()
         {
@@ -57,9 +64,7 @@ namespace PacMan
 
             }
         }
-        
-
-        private void InitializeGhosts()
+        public void InitializeGhosts()
         {
             for (int y = 0; y < map.level.GetLength(0); y++)
             {

@@ -89,6 +89,7 @@ namespace PacMan
                     if (pacman.poweredUp)
                     {
                         ghost.HandleBeingEaten();
+                        Score += 200;
                     }
                     else
                     {

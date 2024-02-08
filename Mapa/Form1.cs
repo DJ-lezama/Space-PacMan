@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Mapa;
+using static PacMan.Ghost;
 
 namespace PacMan
 {
@@ -83,18 +84,38 @@ namespace PacMan
 
         private void ResetGame()
         {
-            
+            //Re-initialize map
+            Map newMap = new Map();
+            canvas.SetMap(newMap);
+
+            //Re-initialize Pacman
+            canvas.InitializePacman();
+            canvas.pacman.lives = 3;
+
+            //Re-initialize ghosts
+            canvas.ghosts.Clear();
+            canvas.InitializeGhosts();
+            foreach (Ghost ghost in canvas.ghosts)
+            {
+                ghost.CurrentMode = Ghost.GhostMode.Chase;
+            }
+
+
+            canvas.map.Score = 0;
+            canvas.pacman.poweredUp = false;
+            gameOver = false;
         }
         
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //Check if there are still Pills and/or Pellets on the map
             if (!gameOver && !canvas.map.ArePillsOrPelletsLeft())
             {
                 gameOver = true;
                 WinningGameLogic();
-                
             }
             
+            //Check pacman ate a Pellet
             if (canvas.pacman.poweredUp)
             {
                 // Change ghosts mode to Frightened mode
@@ -106,6 +127,7 @@ namespace PacMan
                 poweredUpDuration--;
                 if (poweredUpDuration <= 0)
                 {
+                    //Deactivate Pacman powered up mode
                     canvas.pacman.poweredUp = false;
                     
                     // Deactivate Frightened mode
@@ -118,6 +140,7 @@ namespace PacMan
                 }
             }
             
+            //Check if Oacman is alive
             if (canvas.pacman.isAlive)
             {
                 canvas.pacman.PacmanMove(canvas.map);
@@ -129,6 +152,7 @@ namespace PacMan
                 GameOver();
             }
 
+            //Check ghosts' states and modes
             foreach (Ghost ghost in canvas.ghosts){
                 if (ghost.isAlive)
                 {
