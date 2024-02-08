@@ -14,7 +14,7 @@ namespace Mapa
         public void Move(Ghost ghost, Map map)
         {
             // set duration to 7 sconds if Scatter mode hasn't happened more than once, otherwise set it to 5 seconds
-            scatterDuration = scatterModeHappenings < 2 ? 560 : 400;
+            scatterDuration = scatterModeHappenings < 2 ? 480 : 400;
 
             (int targetX, int targetY) = GetTarget(ghost, map);
             
