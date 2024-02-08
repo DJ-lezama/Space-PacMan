@@ -36,7 +36,7 @@ namespace PacMan
             this.initialX = x;
             this.initialY = y;
 
-            this.CurrentMode = GhostMode.Chase;
+            this.CurrentMode = GhostMode.Scatter;
             this.Identifier = identifier;
             direction = d;
         }
