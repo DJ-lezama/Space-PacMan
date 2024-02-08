@@ -140,7 +140,7 @@ namespace PacMan
                 }
             }
             
-            //Check if Oacman is alive
+            //Check if Pacman is alive
             if (canvas.pacman.isAlive)
             {
                 canvas.pacman.PacmanMove(canvas.map);

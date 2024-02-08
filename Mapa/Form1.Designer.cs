@@ -68,30 +68,33 @@
             // 
             this.LBL_SCORE.AutoSize = true;
             this.LBL_SCORE.BackColor = System.Drawing.Color.Black;
+            this.LBL_SCORE.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.LBL_SCORE.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.LBL_SCORE.Location = new System.Drawing.Point(175, 28);
             this.LBL_SCORE.Name = "LBL_SCORE";
-            this.LBL_SCORE.Size = new System.Drawing.Size(57, 16);
+            this.LBL_SCORE.Size = new System.Drawing.Size(97, 26);
             this.LBL_SCORE.TabIndex = 2;
             this.LBL_SCORE.Text = "SCORE:";
             // 
             // LBL_LIVES
             // 
             this.LBL_LIVES.AutoSize = true;
+            this.LBL_LIVES.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.LBL_LIVES.ForeColor = System.Drawing.Color.Snow;
-            this.LBL_LIVES.Location = new System.Drawing.Point(694, 18);
+            this.LBL_LIVES.Location = new System.Drawing.Point(666, 28);
             this.LBL_LIVES.Name = "LBL_LIVES";
-            this.LBL_LIVES.Size = new System.Drawing.Size(47, 16);
+            this.LBL_LIVES.Size = new System.Drawing.Size(81, 26);
             this.LBL_LIVES.TabIndex = 3;
             this.LBL_LIVES.Text = "LIVES:";
             // 
             // LBL_LIVES_LEFT
             // 
             this.LBL_LIVES_LEFT.AutoSize = true;
+            this.LBL_LIVES_LEFT.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.LBL_LIVES_LEFT.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.LBL_LIVES_LEFT.Location = new System.Drawing.Point(747, 18);
+            this.LBL_LIVES_LEFT.Location = new System.Drawing.Point(747, 28);
             this.LBL_LIVES_LEFT.Name = "LBL_LIVES_LEFT";
-            this.LBL_LIVES_LEFT.Size = new System.Drawing.Size(0, 16);
+            this.LBL_LIVES_LEFT.Size = new System.Drawing.Size(0, 26);
             this.LBL_LIVES_LEFT.TabIndex = 4;
             // 
             // Form1
