@@ -39,6 +39,7 @@ namespace Mapa
                     break;
             }
 
+            /*
             var path = AStarSearch(map, gh, p);
 
             // Move to the next step in the path if it exists
@@ -46,8 +47,10 @@ namespace Mapa
             {
                 gh = path.First();
             }
+            */
         }
 
+        /*
         private AStarSearch(Map map, PointF start, PointF goal)
         {
             // This function should implement the A* algorithm to find the shortest path
@@ -55,5 +58,6 @@ namespace Mapa
             // You'll need to fill in the actual A* logic here.
             return;
         }
+        */
     }
 }
