@@ -39,17 +39,47 @@ namespace PacMan
                 rand = new Random();
             }
 
-            if (((cntT + rand.Next(1,5)) % 5) == 0)
+            // Define el centro y el radio de la estrella
+            float centerX = x * sqr + sqr / 2;
+            float centerY = y * sqr + sqr / 2;
+            float radius = sqr / 3f;
+            float innerRadius = radius / 2.5f;
+
+            // Crea un path para dibujar la estrella
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+
+            // Define los puntos de la estrella
+            double angle = Math.PI / 5; // Ángulo entre los puntos de la estrella
+
+            for (int i = 0; i < 10; i++)
             {
-                g.FillEllipse(new SolidBrush(Color.FromArgb(35, 200, 180)), (x * sqr), (y * sqr), sqr, sqr);
-                g.FillEllipse(Brushes.Yellow, (x * sqr) + 3, (y * sqr) + 3, sqr - 6, sqr - 6);
-                g.FillEllipse(Brushes.Linen, (x * sqr) + 5, (y * sqr) + 5, sqr - 10, sqr - 10);
-            } else
+                float r = (i % 2 == 0) ? radius : innerRadius;
+                float pointX = centerX + (float)(r * Math.Sin(i * angle));
+                float pointY = centerY - (float)(r * Math.Cos(i * angle));
+                if (i == 0)
+                {
+                    path.StartFigure();
+                    path.AddLine(pointX, pointY, pointX, pointY);
+                }
+                else
+                {
+                    path.AddLine(path.GetLastPoint(), new PointF(pointX, pointY));
+                }
+            }
+            path.CloseFigure();
+
+            // Decide el color basado en el contador de tiempo para animar la estrella
+            if (((cntT + rand.Next(1, 5)) % 5) == 0)
             {
-                g.FillEllipse(new SolidBrush(Color.FromArgb(100, 200, 200, 180)), (x * sqr), (y * sqr), sqr, sqr);
-                g.FillEllipse(Brushes.Orange, (x * sqr) + 2, (y * sqr) + 2, sqr - 4, sqr - 4);
-                g.FillEllipse(new SolidBrush(Color.FromArgb(100, 100, 150, 180)), (x * sqr) + 5, (y * sqr) + 5, sqr - 10, sqr - 10);   
+                g.FillPath(new SolidBrush(Color.FromArgb(35, 200, 180)), path);
+                g.FillPath(Brushes.Yellow, path);
+            }
+            else
+            {
+                g.FillPath(new SolidBrush(Color.FromArgb(100, 200, 200, 180)), path);
+                g.FillPath(Brushes.Orange, path);
             }
         }
+
     }
 }
