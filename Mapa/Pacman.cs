@@ -94,15 +94,29 @@ namespace PacMan
                     case 0:
                     case 1:
                     case 5:
-                        g.FillEllipse(Brushes.Yellow, drawX, drawY, sqr, sqr);
+                        // Casco cerrado
+                        g.FillEllipse(Brushes.White, drawX, drawY, sqr, sqr);
+                        // Visor como un círculo cuando el casco está cerrado
+                        g.FillEllipse(Brushes.LightSkyBlue, drawX + (sqr / 4), drawY + (sqr / 4), sqr / 2, sqr / 2);
+                        // Reflejo en el visor, ajustado para coincidir con la forma circular
+                        g.FillEllipse(Brushes.LightGray, drawX + (sqr / 3), drawY + (sqr / 3), sqr / 5, sqr / 5);
                         break;
                     case 2:
                     case 4:
-                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, startAngle, sweepAngle);
+                        // Casco abriendo
+                        g.FillPie(Brushes.White, drawX, drawY, sqr, sqr, startAngle, sweepAngle);
+                        // Visor adaptado al efecto pie, manteniendo la forma previa pero con el efecto "abriendo boca"
+                        g.FillPie(Brushes.LightSkyBlue, drawX + (sqr / 8), drawY + (sqr / 4), 3 * sqr / 4, sqr / 2, startAngle, sweepAngle);
+                        // Reflejo adaptado, ajustado según el tamaño y posición del visor
+                        g.FillPie(Brushes.LightGray, drawX + (2 * sqr / 5), drawY + (sqr / 3), sqr / 5, sqr / 5, startAngle, sweepAngle);
                         break;
                     case 3:
-                        // Adjust the start angle and sweep angle for a "mouth open" effect
-                        g.FillPie(Brushes.Yellow, drawX, drawY, sqr, sqr, startAngle + 15, sweepAngle - 30);
+                        // Casco más abierto
+                        g.FillPie(Brushes.White, drawX, drawY, sqr, sqr, startAngle + 15, sweepAngle - 30);
+                        // Visor más abierto y ajustado
+                        g.FillPie(Brushes.LightSkyBlue, drawX + (sqr / 8), drawY + (sqr / 4), 3 * sqr / 4, sqr / 2, startAngle + 15, sweepAngle - 30);
+                        // Reflejo más abierto, ajustado según el tamaño y posición del visor
+                        g.FillPie(Brushes.LightGray, drawX + (2 * sqr / 5), drawY + (sqr / 3), sqr / 5, sqr / 5, startAngle + 15, sweepAngle - 30);
                         break;
                 }
 
