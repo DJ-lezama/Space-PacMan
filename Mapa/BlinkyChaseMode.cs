@@ -41,6 +41,5 @@ namespace Mapa
 
             s = new Search(map);
         }
-        */
     }
 }
