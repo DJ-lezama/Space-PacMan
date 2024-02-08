@@ -6,7 +6,7 @@ namespace Mapa
 {
     public class ScatterMode : IMoveBehaviour
     {
-        public int scatterCounter = 0;
+        public int scatterCounter;
         public int scatterDuration;
         public int scatterModeHappenings = 0;
         private char target;
@@ -28,6 +28,7 @@ namespace Mapa
             {
                 scatterCounter = 0;
                 ghost.CurrentMode = Ghost.GhostMode.Chase;
+                
             }
         }
 
@@ -54,8 +55,6 @@ namespace Mapa
 
         public void RetreatToCorner(Ghost ghost, Map map, int targetX, int targetY)
         {
-            
-            
             // Potential new positions
             int newX = (int)ghost.x;
             int newY = (int)ghost.y;
