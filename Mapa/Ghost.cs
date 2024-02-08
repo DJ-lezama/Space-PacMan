@@ -11,6 +11,9 @@ namespace PacMan
         public float x, y;
         public float initialX, initialY; // Store initial positions
         private int sqr = 20;
+        public enum Direction { Up, Down, Left, Right }
+        public Direction direction;
+
         public enum GhostMode
         {
             Scatter,
@@ -24,7 +27,7 @@ namespace PacMan
         public string Identifier { get; set; }
         
 
-        public Ghost(float x, float y, String identifier)
+        public Ghost(float x, float y, String identifier, Direction d)
         {
             isAlive = true;
             this.x = x;
@@ -35,6 +38,7 @@ namespace PacMan
 
             this.CurrentMode = GhostMode.Chase;
             this.Identifier = identifier;
+            direction = d;
         }
 
         public void PerformMove(Map map)
