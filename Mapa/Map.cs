@@ -63,8 +63,6 @@ namespace PacMan
             return level[y, x] != '0'; // '0' represents a wall, which is not passable.
         }
 
-        
-
         public void EatPillOrPellet(int pacmanX, int pacmanY, Pacman pacman)
         {
             if (level[pacmanY, pacmanX] == '1') // Normal pill
