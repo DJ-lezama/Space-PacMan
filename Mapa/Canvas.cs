@@ -73,19 +73,19 @@ namespace PacMan
                     switch (map.level[y, x])
                     {
                         case 'A':
-                            redGhost = new Ghost(x, y, "blinky");
+                            redGhost = new Ghost(x, y, "blinky", Ghost.Direction.Right);
                             ghosts.Add(redGhost);
                             break;
                         case 'B':
-                            pinkGhost = new Ghost(x, y, "pinky");
+                            pinkGhost = new Ghost(x, y, "pinky", Ghost.Direction.Right);
                             ghosts.Add(pinkGhost);
                             break;
                         case 'C':
-                            blueGhost = new Ghost(x, y, "inky");
+                            blueGhost = new Ghost(x, y, "inky", Ghost.Direction.Left);
                             ghosts.Add(blueGhost);
                             break;
                         case 'D':
-                            orangeGhost = new Ghost(x, y, "clyde");
+                            orangeGhost = new Ghost(x, y, "clyde", Ghost.Direction.Left);
                             ghosts.Add(orangeGhost);
                             break;
                     }
