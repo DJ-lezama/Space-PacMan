@@ -39,6 +39,7 @@
             this.LBL_GHOST_MODE_PINKY = new System.Windows.Forms.Label();
             this.LBL_GHOTS_MODE_CLYDE = new System.Windows.Forms.Label();
             this.LBL_GHOST_MODE_INKY = new System.Windows.Forms.Label();
+            this.LBL_TIMER_TICK = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PCT_CANVAS)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,12 +142,23 @@
             this.LBL_GHOST_MODE_INKY.TabIndex = 8;
             this.LBL_GHOST_MODE_INKY.Text = "label1";
             // 
+            // LBL_TIMER_TICK
+            // 
+            this.LBL_TIMER_TICK.AutoSize = true;
+            this.LBL_TIMER_TICK.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.LBL_TIMER_TICK.Location = new System.Drawing.Point(1014, 27);
+            this.LBL_TIMER_TICK.Name = "LBL_TIMER_TICK";
+            this.LBL_TIMER_TICK.Size = new System.Drawing.Size(44, 16);
+            this.LBL_TIMER_TICK.TabIndex = 9;
+            this.LBL_TIMER_TICK.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1282, 753);
+            this.Controls.Add(this.LBL_TIMER_TICK);
             this.Controls.Add(this.LBL_GHOST_MODE_INKY);
             this.Controls.Add(this.LBL_GHOTS_MODE_CLYDE);
             this.Controls.Add(this.LBL_GHOST_MODE_PINKY);
@@ -176,6 +188,7 @@
         private System.Windows.Forms.Label LBL_GHOST_MODE_PINKY;
         private System.Windows.Forms.Label LBL_GHOTS_MODE_CLYDE;
         private System.Windows.Forms.Label LBL_GHOST_MODE_INKY;
+        private System.Windows.Forms.Label LBL_TIMER_TICK;
     }
 }
 

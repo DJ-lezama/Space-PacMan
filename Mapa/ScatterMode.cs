@@ -28,28 +28,6 @@ namespace Mapa
             {
                 scatterCounter = 0;
                 ghost.CurrentMode = Ghost.GhostMode.Chase;
-                /*
-                switch (ghost.Identifier)
-                {
-                    case "blinky":
-                        ghost.MoveBehaviour = new BlinkyChaseMode();
-                        ghost.PerformMove(map);
-                        break;
-                    case "pinky":
-                        ghost.MoveBehaviour = new PinkyChaseMode();
-                        ghost.PerformMove(map);
-                        break;
-                    case "inky":
-                        ghost.MoveBehaviour = new InkyChaseMode();
-                        ghost.PerformMove(map);
-                        break;
-                    case "clyde":
-                        ghost.MoveBehaviour = new ClydeChaseMode();
-                        ghost.PerformMove(map);
-                        break;
-                }
-                */
-                
             }
         }
 
