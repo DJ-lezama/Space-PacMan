@@ -59,11 +59,9 @@ namespace PacMan
         {
             int drawX = X * sqr;
             int drawY = Y * sqr;
-            int startAngle, sweepAngle;
 
             if (this.isAlive)
             {
-
                 // Platillo volador
                 g.FillEllipse(Brushes.Silver, drawX, drawY + (sqr / 4), sqr, sqr / 2); // Cuerpo principal del platillo
                 g.FillEllipse(Brushes.Gray, drawX + (sqr / 4), drawY, sqr / 2, sqr / 2); // Cúpula en la parte superior
