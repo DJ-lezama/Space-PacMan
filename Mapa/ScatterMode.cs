@@ -81,6 +81,8 @@ namespace Mapa
                 ghost.x = nextNode.X;
                 ghost.y = nextNode.Y;
             }
+            
+            
         }
     }
 }

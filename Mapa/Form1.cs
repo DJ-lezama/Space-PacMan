@@ -197,7 +197,11 @@ namespace PacMan
                             break;
                         case GhostMode.Frightened:
                             ghost.MoveBehaviour = new FrightenedMode();
-                            ghost.PerformMove(canvas.map, canvas);
+                            if (_timerCounter % 2 == 0)
+                            {
+                                
+                                ghost.PerformMove(canvas.map, canvas);
+                            }
                             break;
                     }
                 }
