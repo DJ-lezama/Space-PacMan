@@ -20,7 +20,7 @@ namespace Mapa
                     newY = map.pacman.Y;
                     break;
                 case Pacman.Direction.Right:
-                    newX = Math.Min(map.pacman.X + 4, search.grid.GetLength(1) - 1); // Asegura que newX no exceda el máximo índice en X
+                    newX = Math.Min(map.pacman.X + 4, map.level.GetLength(1) - 1); // Asegura que newX no exceda el máximo índice en X
                     newY = map.pacman.Y;
                     break;
                 case Pacman.Direction.Up:
@@ -29,7 +29,7 @@ namespace Mapa
                     break;
                 case Pacman.Direction.Down:
                     newX = map.pacman.X;
-                    newY = Math.Min(map.pacman.Y + 4, search.grid.GetLength(0) - 1); // Asegura que newY no exceda el máximo índice en Y
+                    newY = Math.Min(map.pacman.Y + 4, map.level.GetLength(0) - 1); // Asegura que newY no exceda el máximo índice en Y
                     break;
                 default:
                     newX = map.pacman.X; // Mantén la posición actual si la dirección no es válida

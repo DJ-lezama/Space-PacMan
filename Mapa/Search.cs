@@ -131,6 +131,13 @@ namespace Mapa
                             }
                             break;
                         case "inky":
+                            if (checkX >= 0 && checkX < grid.GetLength(0) && checkY >= 0 && checkY < grid.GetLength(1))
+                            {
+                                if (!grid[checkX, checkY].IsWall)
+                                {
+                                    neighbours.Add(grid[checkX, checkY]);
+                                }
+                            }
                             break;
                         case "clyde":
                             break;

@@ -9,10 +9,8 @@ namespace Mapa
 {
     public class BlinkyChaseMode : IMoveBehaviour
     {
-        public static Ghost g;
         public void Move(Ghost ghost, Map map, Canvas c)
         {
-            g = ghost;
             Search search = new Search(map, ghost);
             Node nodoInicial = search.grid[(int)ghost.x, (int)ghost.y];
             Node nodoObjetivo = search.grid[map.pacman.X, map.pacman.Y];
