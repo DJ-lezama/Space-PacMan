@@ -13,18 +13,18 @@ namespace Mapa
         public void Move(Ghost ghost, Map map, Canvas c)
         {
             // set duration to 7 seconds if Scatter mode hasn't happened more than once, otherwise set it to 5 seconds
-            _scatterDuration = scatterModeHappenings < 2 ? 40 : 30;
+            _scatterDuration = scatterModeHappenings < 2 ? 160 : 240;
 
             var (targetX, targetY) = GetTarget(ghost, map);
             
-            if (ghost.scatterCounter < _scatterDuration)
+            if (ghost.scatterCounter < _scatterDuration && (Math.Abs((int)ghost.x - targetX) >= 0.5 && Math.Abs((int)ghost.y - targetY) >= 0.5))
             {
-                RetreatToCorner(ghost, map, targetX, targetY);
+                RetreatToCorner2(ghost, map, targetX, targetY);
                 ghost.scatterCounter++;
             }
             
             //Change from scatter mode if the counter is grater or equal than duration or the ghost has reached its target
-            else if (ghost.scatterCounter >= _scatterDuration || (ghost.x == targetX && ghost.y == targetY))
+            else //if (ghost.scatterCounter >= _scatterDuration || (Math.Abs((int)ghost.x - targetX) <= 0.5 && Math.Abs((int)ghost.y - targetY) <= 0.5))
             {
                 ghost.scatterCounter = 0;
                 ghost.CurrentMode = Ghost.GhostMode.Chase;
@@ -65,6 +65,22 @@ namespace Mapa
             }
             (int targetX, int targetY) = map.SearchTarget(_target);
             return (targetX, targetY);
+        }
+
+        private void RetreatToCorner2(Ghost ghost, Map map, int targetX, int targetY)
+        {
+            Search search = new Search(map);
+            Node startNode = search.grid[(int)ghost.x, (int)ghost.y];
+            Node targetNode = search.grid[targetX, targetY];
+            
+            List<Node> path = search.FindPath(startNode, targetNode);
+
+            if (path != null && path.Count > 0)
+            {
+                Node nextNode = path.Count == 1 ? path[0] : path[1];
+                ghost.x = nextNode.X;
+                ghost.y = nextNode.Y;
+            }
         }
 
         public void RetreatToCorner(Ghost ghost, Map map, int targetX, int targetY)

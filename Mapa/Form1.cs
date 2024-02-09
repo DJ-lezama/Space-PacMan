@@ -155,7 +155,10 @@ namespace PacMan
                     switch (ghost.CurrentMode)
                     {
                         case GhostMode.Scatter:
-                            ghost.MoveBehaviour = new ScatterMode();
+                            if (_timerCounter % 9 == 0)
+                            {
+                                ghost.MoveBehaviour = new ScatterMode();
+                            }
                             ghost.PerformMove(canvas.map, canvas);
                             break;
                         case GhostMode.Chase:
@@ -163,11 +166,10 @@ namespace PacMan
                             {
                                 case "blinky":
                                     ghost.MoveBehaviour = new BlinkyChaseMode();
-                                    if (_timerCounter % 3 == 0)
+                                    if (_timerCounter % 6 == 0)
                                     {
                                         ghost.PerformMove(canvas.map, canvas);
                                     }
-                                   
                                     break;
                                 case "pinky":
                                     ghost.MoveBehaviour = new PinkyChaseMode();
