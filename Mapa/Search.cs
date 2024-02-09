@@ -9,7 +9,7 @@ namespace Mapa
 {
     public class Search
     {
-        private Node[,] grid;
+        public Node[,] grid;
         private List<Node> openList;
         private HashSet<Node> closedList;
 
@@ -110,7 +110,7 @@ namespace Mapa
                     int checkX = node.X + x;
                     int checkY = node.Y + y;
 
-                    if (checkX >= 0 && checkX < grid.GetLength(0) && checkY >= 0 && checkY < grid.GetLength(1))
+                    if ((checkX >= 0 && checkX < grid.GetLength(1) && checkY >= 0 && checkY < grid.GetLength(0)) && grid[checkX,checkY].IsWall != true)
                     {
                         neighbours.Add(grid[checkX, checkY]);
                     }
@@ -125,9 +125,7 @@ namespace Mapa
             int distX = Math.Abs(nodeA.X - nodeB.X);
             int distY = Math.Abs(nodeA.Y - nodeB.Y);
 
-            if (distX > distY)
-                return 14 * distY + 10 * (distX - distY);
-            return 14 * distX + 10 * (distY - distX);
+            return 20 * (distX + distY); ;
         }
     }
 }

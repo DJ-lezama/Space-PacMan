@@ -6,7 +6,7 @@ namespace Mapa
 {
     public class PinkyChaseMode : IMoveBehaviour
     {
-        public void Move(Ghost ghost, Map map)
+        public void Move(Ghost ghost, Map map, Canvas c)
         {
             //Set target 
             int targetX = map.pacman.X;
