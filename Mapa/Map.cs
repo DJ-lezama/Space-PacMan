@@ -96,6 +96,7 @@ namespace PacMan
                         if (pacman.lives > 0)
                         {
                             pacman.isAlive = true;
+                            canvas.RespawnPacman();
                         }
                         
                     }
