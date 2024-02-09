@@ -6,39 +6,53 @@ namespace Mapa
 {
     public class InkyChaseMode : IMoveBehaviour
     {
-        Node nodoObjetivo;
-        int newX, newY;
+        Node nodoObjetivo, bl;
+        Ghost gh;
+        int dpaX, dpaY;
+        bool p;
+
         public void Move(Ghost ghost, Map map, Canvas c)
         {
+            gh = BlinkyChaseMode.g;
             Search search = new Search(map, ghost);
             Node nodoInicial = search.grid[(int)ghost.x, (int)ghost.y];
 
             switch (map.pacman.CurrentDirection)
             {
                 case Pacman.Direction.Left:
-                    newX = Math.Max(map.pacman.X - 4, 0); // Asegura que newX no sea menor que 0
-                    newY = map.pacman.Y;
+                    dpaX = Math.Max(map.pacman.X - 2, 0); // Asegura que dpaX no sea menor que 0
+                    dpaY = map.pacman.Y;
                     break;
                 case Pacman.Direction.Right:
-                    newX = Math.Min(map.pacman.X + 4, search.grid.GetLength(1) - 1); // Asegura que newX no exceda el máximo índice en X
-                    newY = map.pacman.Y;
+                    dpaX = Math.Min(map.pacman.X + 2, search.grid.GetLength(1) - 1); // Asegura que dpaX no exceda el máximo índice en X
+                    dpaY = map.pacman.Y;
                     break;
                 case Pacman.Direction.Up:
-                    newX = map.pacman.X;
-                    newY = Math.Max(map.pacman.Y - 4, 0); // Asegura que newY no sea menor que 0
+                    dpaX = map.pacman.X;
+                    dpaY = Math.Max(map.pacman.Y - 2, 0); // Asegura que dpaY no sea menor que 0
                     break;
                 case Pacman.Direction.Down:
-                    newX = map.pacman.X;
-                    newY = Math.Min(map.pacman.Y + 4, search.grid.GetLength(0) - 1); // Asegura que newY no exceda el máximo índice en Y
+                    dpaX = map.pacman.X;
+                    dpaY = Math.Min(map.pacman.Y + 2, search.grid.GetLength(0) - 1); // Asegura que dpaY no exceda el máximo índice en Y
                     break;
                 default:
-                    newX = map.pacman.X; // Mantén la posición actual si la dirección no es válida
-                    newY = map.pacman.Y;
+                    dpaX = map.pacman.X; // Mantén la posición actual si la dirección no es válida
+                    dpaY = map.pacman.Y;
                     break;
             }
 
+            bl = search.grid[dpaX - (int)gh.x, dpaY - (int)gh.y];
+            p = map.IsPassable(bl.X, bl.Y);
+
+            if (p == false)
+            {
+
+            }
+            else
+            {
+                nodoObjetivo = search.grid[dpaX + bl.X, dpaY + bl.Y];
+            }
             // Ahora newX y newY están dentro de los límites, así que puedes acceder de forma segura a grid
-            nodoObjetivo = search.grid[newX, newY];
 
             List<Node> camino = search.FindPath(nodoInicial, nodoObjetivo);
 
