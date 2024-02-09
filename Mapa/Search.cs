@@ -124,9 +124,12 @@ namespace Mapa
                     switch (ghost.Identifier)
                     {
                         case "blinky":
-                            if ((checkX >= 0 && checkX < grid.GetLength(1) && checkY >= 0 && checkY < grid.GetLength(0)) || grid[checkX, checkY].IsWall != true)
+                            if (checkX >= 0 && checkX < grid.GetLength(0) && checkY >= 0 && checkY < grid.GetLength(1))
                             {
-                                neighbours.Add(grid[checkX, checkY]);
+                                if (!grid[checkX, checkY].IsWall)
+                                {
+                                    neighbours.Add(grid[checkX, checkY]);
+                                }
                             }
                             break;
                         case "pinky":
@@ -148,9 +151,12 @@ namespace Mapa
                             }
                             break;
                         case "clyde":
-                            if ((checkX >= 0 && checkX < grid.GetLength(1) && checkY >= 0 && checkY < grid.GetLength(0)) || grid[checkX, checkY].IsWall != true)
+                            if (checkX >= 0 && checkX < grid.GetLength(0) && checkY >= 0 && checkY < grid.GetLength(1))
                             {
-                                neighbours.Add(grid[checkX, checkY]);
+                                if (!grid[checkX, checkY].IsWall)
+                                {
+                                    neighbours.Add(grid[checkX, checkY]);
+                                }
                             }
                             break;
                     }
