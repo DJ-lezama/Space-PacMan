@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Mapa
 {
@@ -12,9 +13,11 @@ namespace Mapa
         public Node[,] grid;
         private List<Node> openList;
         private HashSet<Node> closedList;
+        public Ghost ghost;
 
-        public Search(Map m)
+        public Search(Map m, Ghost g)
         {
+            this.ghost = g;
             grid = new Node[m.level.GetLength(1), m.level.GetLength(0)];
             openList = new List<Node>();
             closedList = new HashSet<Node>();
@@ -110,9 +113,34 @@ namespace Mapa
                     int checkX = node.X + x;
                     int checkY = node.Y + y;
 
-                    if ((checkX >= 0 && checkX < grid.GetLength(1) && checkY >= 0 && checkY < grid.GetLength(0)) || grid[checkX,checkY].IsWall != true)
+                    switch (ghost.Identifier)
                     {
-                        neighbours.Add(grid[checkX, checkY]);
+                        case "blinky":
+                            if ((checkX >= 0 && checkX < grid.GetLength(1) && checkY >= 0 && checkY < grid.GetLength(0)) || grid[checkX, checkY].IsWall != true)
+                            {
+                                neighbours.Add(grid[checkX, checkY]);
+                            }
+                            break;
+                        case "pinky":
+                            if (checkX >= 0 && checkX < grid.GetLength(0) && checkY >= 0 && checkY < grid.GetLength(1))
+                            {
+                                if (!grid[checkX, checkY].IsWall)
+                                {
+                                    neighbours.Add(grid[checkX, checkY]);
+                                }
+                            }
+                            break;
+                        case "inky":
+                            if (checkX >= 0 && checkX < grid.GetLength(0) && checkY >= 0 && checkY < grid.GetLength(1))
+                            {
+                                if (!grid[checkX, checkY].IsWall)
+                                {
+                                    neighbours.Add(grid[checkX, checkY]);
+                                }
+                            }
+                            break;
+                        case "clyde":
+                            break;
                     }
                 }
             }
