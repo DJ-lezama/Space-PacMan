@@ -11,7 +11,7 @@ namespace Mapa
         public int scatterModeHappenings = 0;
         private char target;
 
-        public void Move(Ghost ghost, Map map)
+        public void Move(Ghost ghost, Map map, Canvas c)
         {
             // set duration to 7 sconds if Scatter mode hasn't happened more than once, otherwise set it to 5 seconds
             scatterDuration = scatterModeHappenings < 2 ? 480 : 400;

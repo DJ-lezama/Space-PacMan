@@ -160,32 +160,32 @@ namespace PacMan
                     {
                         case Ghost.GhostMode.Scatter:
                             ghost.MoveBehaviour = new ScatterMode();
-                            ghost.PerformMove(canvas.map);
+                            ghost.PerformMove(canvas.map, canvas);
                             break;
                         case Ghost.GhostMode.Chase:
                             switch (ghost.Identifier)
                             {
                                 case "blinky":
                                     ghost.MoveBehaviour = new BlinkyChaseMode();
-                                    ghost.PerformMove(canvas.map);
+                                    ghost.PerformMove(canvas.map, canvas);
                                     break;
                                 case "pinky":
                                     ghost.MoveBehaviour = new PinkyChaseMode();
-                                    ghost.PerformMove(canvas.map);
+                                    ghost.PerformMove(canvas.map, canvas);
                                     break;
                                 case "inky":
                                     ghost.MoveBehaviour = new InkyChaseMode();
-                                    ghost.PerformMove(canvas.map);
+                                    ghost.PerformMove(canvas.map, canvas);
                                     break;
                                 case "clyde":
                                     ghost.MoveBehaviour = new ClydeChaseMode();
-                                    ghost.PerformMove(canvas.map);
+                                    ghost.PerformMove(canvas.map, canvas);
                                     break;
                             }
                             break;
                         case Ghost.GhostMode.Frightened:
                             ghost.MoveBehaviour = new FrightenedMode();
-                            ghost.PerformMove(canvas.map);
+                            ghost.PerformMove(canvas.map, canvas);
                             break;
                     }
                 }
