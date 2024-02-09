@@ -7,7 +7,7 @@ namespace PacMan
     public class Canvas
     {
         public Map map = new Map();
-        public Graphics g;
+        private Graphics _g;
         public Pacman pacman;
         public Ghost redGhost;
         public Ghost pinkGhost;
@@ -17,7 +17,7 @@ namespace PacMan
         public int sqr = 20;
         public Canvas(Bitmap bmp)
         {
-            g = Graphics.FromImage(bmp);
+            _g = Graphics.FromImage(bmp);
             InitializePacman();
             InitializeGhosts();
         }
@@ -103,17 +103,17 @@ namespace PacMan
             {
                 for (int x = 0; x < map.level.GetLength(1); x++)
                 {
-                    g.FillRectangle(Brushes.Black, x * sqr, y * sqr, sqr, sqr);
+                    _g.FillRectangle(Brushes.Black, x * sqr, y * sqr, sqr, sqr);
                     switch (map.level[y, x])
                     {
                         case '0':
-                            Brick.DrawLunarBrick(g, x, y, sqr);
+                            Brick.DrawLunarBrick(_g, x, y, sqr);
                             break;
                         case '1':
-                            Pill.DrawPill(g, x, y, sqr, counter_timer);
+                            Pill.DrawPill(_g, x, y, sqr, counter_timer);
                             break;
                         case '2':
-                            Pill.DrawPowerPellet(g, x, y, sqr, counter_timer);
+                            Pill.DrawPowerPellet(_g, x, y, sqr, counter_timer);
                             break;                        
                     }
                 }
@@ -121,13 +121,13 @@ namespace PacMan
 
             if (pacman != null) 
             {
-                pacman.Anim(g, counter_timer);
+                pacman.Anim(_g, counter_timer);
             }
 
-            redGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Crimson, map);
-            pinkGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Thistle, map);
-            blueGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.DeepSkyBlue, map);
-            orangeGhost.AnimGhost(g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Coral, map);
+            redGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Crimson, map);
+            pinkGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Thistle, map);
+            blueGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.DeepSkyBlue, map);
+            orangeGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Coral, map);
         } 
     }
 }
