@@ -11,7 +11,7 @@ namespace Mapa
     {
         public void Move(Ghost ghost, Map map, Canvas c)
         {
-            Search search = new Search(map);
+            Search search = new Search(map, ghost);
             Node nodoInicial = search.grid[(int)ghost.x, (int)ghost.y];
             Node nodoObjetivo = search.grid[map.pacman.X, map.pacman.Y];
             
