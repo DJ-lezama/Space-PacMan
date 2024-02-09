@@ -135,6 +135,15 @@ namespace PacMan
         {
             this.isAlive = false;
         }
+        
+        // Method to update the direction based on movement
+        public void UpdateDirection(int prevX, int prevY)
+        {
+            if (this.x > prevX) this.direction = Direction.Right;
+            else if (this.x < prevX) this.direction = Direction.Left;
+            else if (this.y > prevY) this.direction = Direction.Up;
+            else if (this.y < prevY) this.direction = Direction.Down;
+        }
 
 
     }
