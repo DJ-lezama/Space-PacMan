@@ -69,7 +69,7 @@ namespace Mapa
 
         private void RetreatToCorner2(Ghost ghost, Map map, int targetX, int targetY)
         {
-            Search search = new Search(map);
+            Search search = new Search(map, ghost);
             Node startNode = search.grid[(int)ghost.x, (int)ghost.y];
             Node targetNode = search.grid[targetX, targetY];
             

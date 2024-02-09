@@ -9,10 +9,10 @@ namespace PacMan
         public Map map = new Map();
         private Graphics _g;
         public Pacman pacman;
-        private Ghost _redGhost;
-        private Ghost _pinkGhost;
-        private Ghost _blueGhost;
-        private Ghost _orangeGhost;
+        public Ghost redGhost;
+        public Ghost pinkGhost;
+        public Ghost blueGhost;
+        public Ghost orangeGhost;
         public List<Ghost> ghosts = new List<Ghost>();
         public int sqr = 20;
         public Canvas(Bitmap bmp)
@@ -73,24 +73,24 @@ namespace PacMan
                     switch (map.level[y, x])
                     {
                         case 'A':
-                            _redGhost = new Ghost(x, y, "blinky", Ghost.Direction.Right);
-                            _redGhost.CurrentMode = Ghost.GhostMode.Chase;
-                            ghosts.Add(_redGhost);
+                            redGhost = new Ghost(x, y, "blinky", Ghost.Direction.Right);
+                            redGhost.CurrentMode = Ghost.GhostMode.Chase;
+                            ghosts.Add(redGhost);
                             break;
                         case 'B':
-                            _pinkGhost = new Ghost(x, y, "pinky", Ghost.Direction.Right);
-                            _pinkGhost.CurrentMode = Ghost.GhostMode.Chase;
-                            ghosts.Add(_pinkGhost);
+                            pinkGhost = new Ghost(x, y, "pinky", Ghost.Direction.Right);
+                            pinkGhost.CurrentMode = Ghost.GhostMode.Chase;
+                            ghosts.Add(pinkGhost);
                             break;
                         case 'C':
-                            _blueGhost = new Ghost(x, y, "inky", Ghost.Direction.Left);
-                            _blueGhost.CurrentMode = Ghost.GhostMode.Chase;
-                            ghosts.Add(_blueGhost);
+                            blueGhost = new Ghost(x, y, "inky", Ghost.Direction.Left);
+                            blueGhost.CurrentMode = Ghost.GhostMode.Chase;
+                            ghosts.Add(blueGhost);
                             break;
                         case 'D':
-                            _orangeGhost = new Ghost(x, y, "clyde", Ghost.Direction.Left);
-                            _orangeGhost.CurrentMode = Ghost.GhostMode.Chase;
-                            ghosts.Add(_orangeGhost);
+                            orangeGhost = new Ghost(x, y, "clyde", Ghost.Direction.Left);
+                            orangeGhost.CurrentMode = Ghost.GhostMode.Chase;
+                            ghosts.Add(orangeGhost);
                             break;
                     }
                 }
@@ -124,10 +124,10 @@ namespace PacMan
                 pacman.Anim(_g, counter_timer);
             }
 
-            _redGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Crimson, map);
-            _pinkGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Thistle, map);
-            _blueGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.DeepSkyBlue, map);
-            _orangeGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Coral, map);
+            redGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Crimson, map);
+            pinkGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Thistle, map);
+            blueGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.DeepSkyBlue, map);
+            orangeGhost.AnimGhost(_g, counter_timer, pacman.poweredUp ? Brushes.DarkBlue : Brushes.Coral, map);
         } 
     }
 }
