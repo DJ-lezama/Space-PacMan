@@ -1,7 +1,7 @@
 ﻿using PacMan;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +15,7 @@ namespace Mapa
         private List<Node> openList;
         private HashSet<Node> closedList;
         public Ghost ghost;
+        public int chomex, chomey;
 
         public Search(Map m, Ghost g)
         {
@@ -34,6 +35,11 @@ namespace Mapa
                     }
                     else
                     {
+                        if (m.level[y, x] == 'O')
+                        {
+                            chomex = x; 
+                            chomey = y;
+                        }
                         grid[x, y] = new Node(false, x, y);
                     }
                 }
@@ -141,6 +147,10 @@ namespace Mapa
                             }
                             break;
                         case "clyde":
+                            if ((checkX >= 0 && checkX < grid.GetLength(1) && checkY >= 0 && checkY < grid.GetLength(0)) || grid[checkX, checkY].IsWall != true)
+                            {
+                                neighbours.Add(grid[checkX, checkY]);
+                            }
                             break;
                     }
                 }
