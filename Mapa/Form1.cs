@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using Mapa;
+using PacMan;
 using static PacMan.Ghost;
 
-namespace PacMan
+namespace Mapa
 {
     public partial class Form1 : Form
     {
-        Bitmap bmp;
-        Canvas canvas;
-        int timer_counter;
-        private Boolean gameOver;
-        public int poweredUpDuration;
-        public const int defaultDuration = 100;
+        private Bitmap _bmp;
+        private Canvas _canvas;
+        private int _timerCounter;
+        private bool _gameOver;
+        private int _poweredUpDuration;
+        private const int DefaultDuration = 100;
         
         public Form1()
         {
@@ -21,13 +22,13 @@ namespace PacMan
             Init();
         }
 
-        public void Init()
+        private void Init()
         {
-            bmp = new Bitmap(PCT_CANVAS.Width, PCT_CANVAS.Height);
-            PCT_CANVAS.Image = bmp;
-            canvas = new Canvas(bmp);
-            poweredUpDuration = defaultDuration;
-            gameOver = false;
+            _bmp = new Bitmap(PCT_CANVAS.Width, PCT_CANVAS.Height);
+            PCT_CANVAS.Image = _bmp;
+            _canvas = new Canvas(_bmp);
+            _poweredUpDuration = DefaultDuration;
+            _gameOver = false;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -35,20 +36,20 @@ namespace PacMan
             switch (keyData)
             {
                 case Keys.Left:
-                    canvas.pacman.NextDirection = Pacman.Direction.Left;
+                    _canvas.pacman.NextDirection = Pacman.Direction.Left;
                     break;
                 case Keys.Right:
-                    canvas.pacman.NextDirection = Pacman.Direction.Right;
+                    _canvas.pacman.NextDirection = Pacman.Direction.Right;
                     break;
                 case Keys.Up:
-                    canvas.pacman.NextDirection = Pacman.Direction.Up;
+                    _canvas.pacman.NextDirection = Pacman.Direction.Up;
                     break;
                 case Keys.Down:
-                    canvas.pacman.NextDirection = Pacman.Direction.Down;
+                    _canvas.pacman.NextDirection = Pacman.Direction.Down;
                     break;
             }
 
-            this.Refresh();
+            Refresh();
 
             BTNS_LABEL.Text = keyData.ToString();
             return base.ProcessCmdKey(ref msg, keyData);
@@ -56,20 +57,20 @@ namespace PacMan
         
         private void GameOver()
         {
-            var result = MessageBox.Show("You Lost! Do you want to play again?", "Game Over", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var result = MessageBox.Show(@"You Lost! Do you want to play again?", @"Game Over", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 ResetGame(); 
             }
             else
             {
-                this.Close(); 
+                Close(); 
             }
         }
 
         private void WinningGameLogic()
         {
-            var result = MessageBox.Show("You won! Do you want to play again?", "You won", MessageBoxButtons.YesNo,
+            var result = MessageBox.Show(@"You won! Do you want to play again?", @"You won", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
@@ -77,7 +78,7 @@ namespace PacMan
             }
             else
             {
-                this.Close();
+                Close();
             }
             
         }
@@ -85,103 +86,105 @@ namespace PacMan
         private void ResetGame()
         {
             //Re-initialize map
-            Map newMap = new Map();
-            canvas.SetMap(newMap);
+            var newMap = new Map();
+            _canvas.SetMap(newMap);
 
             //Re-initialize Pacman
-            canvas.InitializePacman();
-            canvas.pacman.lives = 3;
+            _canvas.InitializePacman();
+            _canvas.pacman.lives = 3;
 
             //Re-initialize ghosts
-            canvas.ghosts.Clear();
-            canvas.InitializeGhosts();
-            foreach (Ghost ghost in canvas.ghosts)
+            _canvas.ghosts.Clear();
+            _canvas.InitializeGhosts();
+            foreach (var ghost in _canvas.ghosts)
             {
-                ghost.CurrentMode = Ghost.GhostMode.Chase;
+                ghost.CurrentMode = GhostMode.Chase;
             }
             
-            canvas.map.Score = 0;
-            canvas.pacman.poweredUp = false;
-            gameOver = false;
+            _canvas.map.Score = 0;
+            _canvas.pacman.poweredUp = false;
+            _gameOver = false;
         }
 
         private void PacmanAtePelletChecker()
         {
-            if (canvas.pacman.poweredUp)
+            if (!_canvas.pacman.poweredUp) return;
+            // Change ghosts mode to Frightened mode
+            foreach (var ghost in _canvas.ghosts)
             {
-                // Change ghosts mode to Frightened mode
-                foreach (Ghost ghost in canvas.ghosts)
-                {
-                    ghost.CurrentMode = Ghost.GhostMode.Frightened;
-                }
+                ghost.CurrentMode = GhostMode.Frightened;
+            }
                 
-                poweredUpDuration--;
-                
-                if (poweredUpDuration <= 0)
+            _poweredUpDuration--;
+
+            if (_poweredUpDuration > 0) return;
+            {
+                //Deactivate Pacman powered up mode
+                _canvas.pacman.poweredUp = false;
+                    
+                // Deactivate Frightened mode
+                foreach (var ghost in _canvas.ghosts)
                 {
-                    //Deactivate Pacman powered up mode
-                    canvas.pacman.poweredUp = false;
-                    
-                    // Deactivate Frightened mode
-                    foreach (Ghost ghost in canvas.ghosts)
-                    {
-                        ghost.CurrentMode = Ghost.GhostMode.Chase;
-                    }
-                    
-                    poweredUpDuration = defaultDuration;
+                    ghost.CurrentMode = GhostMode.Chase;
                 }
+                    
+                _poweredUpDuration = DefaultDuration;
             }
         }
 
         private void PacmanIsAliveChecker()
         {
-            if (canvas.pacman.isAlive)
+            if (_canvas.pacman.isAlive)
             {
-                canvas.pacman.PacmanMove(canvas.map);
-                canvas.map.GhostCollisions(canvas.pacman, canvas.ghosts);
+                _canvas.pacman.PacmanMove(_canvas.map);
+                _canvas.map.GhostCollisions(_canvas.pacman, _canvas.ghosts);
             }
-            else if (!gameOver && canvas.pacman.lives <= 0 && !canvas.pacman.isAlive)
+            else if (!_gameOver && _canvas.pacman.lives <= 0 && !_canvas.pacman.isAlive)
             {
-                gameOver = true;
+                _gameOver = true;
                 GameOver();
             }   
         }
 
         private void GhostStateChecker()
         {
-            foreach (Ghost ghost in canvas.ghosts){
+            foreach (var ghost in _canvas.ghosts){
                 if (ghost.isAlive)
                 {
                     switch (ghost.CurrentMode)
                     {
-                        case Ghost.GhostMode.Scatter:
+                        case GhostMode.Scatter:
+                            // Use the scatter mode behaviour
                             ghost.MoveBehaviour = new ScatterMode();
-                            ghost.PerformMove(canvas.map, canvas);
+                            ghost.PerformMove(_canvas.map, _canvas);
                             break;
-                        case Ghost.GhostMode.Chase:
+                        case GhostMode.Chase:
                             switch (ghost.Identifier)
                             {
                                 case "blinky":
                                     ghost.MoveBehaviour = new BlinkyChaseMode();
-                                    ghost.PerformMove(canvas.map, canvas);
+                                    if (_timerCounter % 6 == 0)
+                                    {
+                                        ghost.PerformMove(_canvas.map, _canvas);
+                                    }
                                     break;
                                 case "pinky":
                                     ghost.MoveBehaviour = new PinkyChaseMode();
-                                    ghost.PerformMove(canvas.map, canvas);
+                                    ghost.PerformMove(_canvas.map, _canvas);
                                     break;
                                 case "inky":
                                     ghost.MoveBehaviour = new InkyChaseMode();
-                                    ghost.PerformMove(canvas.map, canvas);
+                                    ghost.PerformMove(_canvas.map, _canvas);
                                     break;
                                 case "clyde":
                                     ghost.MoveBehaviour = new ClydeChaseMode();
-                                    ghost.PerformMove(canvas.map, canvas);
+                                    ghost.PerformMove(_canvas.map, _canvas);
                                     break;
                             }
                             break;
-                        case Ghost.GhostMode.Frightened:
+                        case GhostMode.Frightened:
                             ghost.MoveBehaviour = new FrightenedMode();
-                            ghost.PerformMove(canvas.map, canvas);
+                            ghost.PerformMove(_canvas.map, _canvas);
                             break;
                     }
                 }
@@ -190,31 +193,24 @@ namespace PacMan
 
         private void ScatterModeChecker()
         {
-            if (timer_counter != 0 && timer_counter % 480 == 0  && canvas.map.CountPillsLeft() > 20) 
+            if (_timerCounter == 0 || _timerCounter % 80 != 0 || _canvas.map.CountPillsLeft() <= 20) return;
+            // Change ghosts mode to Scatter mode
+            foreach (var ghost in _canvas.ghosts.Where(ghost => ghost.CurrentMode != GhostMode.Frightened))
             {
-                // Change ghosts mode to Scatter mode
-                foreach (Ghost ghost in canvas.ghosts)
-                {
-                    if (ghost.CurrentMode != GhostMode.Frightened) //Don't switch to Scatter mode if in Frightened mode
-                    {
-                        ghost.CurrentMode = GhostMode.Scatter;
-                        if (ghost.MoveBehaviour is ScatterMode scatterMode)
-                        {
-                            scatterMode.scatterCounter = 0;
-                            scatterMode.scatterModeHappenings++;
-                        }
-                    } 
-                }
-            } 
-            
+                //Don't switch to Scatter mode if in Frightened mode
+                ghost.CurrentMode = GhostMode.Scatter;
+                if (!(ghost.MoveBehaviour is ScatterMode scatterMode)) continue;
+                ghost.scatterCounter = 0;
+                scatterMode.scatterModeHappenings++;
+            }
         }
         
         private void timer1_Tick(object sender, EventArgs e)
         {
             //Check if there are still Pills and/or Pellets on the map
-            if (!gameOver && !canvas.map.ArePillsOrPelletsLeft())
+            if (!_gameOver && !_canvas.map.ArePillsOrPelletsLeft())
             {
-                gameOver = true;
+                _gameOver = true;
                 WinningGameLogic();
             }
             
@@ -230,28 +226,28 @@ namespace PacMan
             //Check if its time to activate the Scatter mode 
             ScatterModeChecker();
             
-            canvas.DrawMap(timer_counter++);
-            LBL_SCORE.Text = "SCORE: " + canvas.map.Score.ToString();
-            LBL_LIVES_LEFT.Text = canvas.pacman.lives.ToString();
-            foreach(Ghost ghost in canvas.ghosts)
+            _canvas.DrawMap(_timerCounter++);
+            LBL_SCORE.Text = @"SCORE: " + _canvas.map.Score;
+            LBL_LIVES_LEFT.Text = _canvas.pacman.lives.ToString();
+            foreach(Ghost ghost in _canvas.ghosts)
             {
                 switch (ghost.Identifier)
                 {
                     case "blinky":
-                        LBL_GHOST_MODE_BLINKY.Text = "Blinky: " + ghost.CurrentMode.ToString();
+                        LBL_GHOST_MODE_BLINKY.Text = @"Blinky: " + ghost.CurrentMode;
                         break;
                     case "pinky":
-                        LBL_GHOST_MODE_PINKY.Text = "Pinky: " + ghost.CurrentMode.ToString();
+                        LBL_GHOST_MODE_PINKY.Text = @"Pinky: " + ghost.CurrentMode;
                         break;
                     case "inky":
-                        LBL_GHOST_MODE_INKY.Text = "Inky: " + ghost.CurrentMode.ToString();
+                        LBL_GHOST_MODE_INKY.Text = @"Inky: " + ghost.CurrentMode;
                         break;
                     case "clyde":
-                        LBL_GHOTS_MODE_CLYDE.Text = "Clyde: " + ghost.CurrentMode.ToString();
+                        LBL_GHOTS_MODE_CLYDE.Text = @"Clyde: " + ghost.CurrentMode;
                         break;
                 }
             }
-            LBL_TIMER_TICK.Text = "TIMER TICK: " + timer_counter;
+            LBL_TIMER_TICK.Text = @"TIMER TICK: " + _timerCounter;
             Refresh();
         }
     }
