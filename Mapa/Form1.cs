@@ -163,7 +163,11 @@ namespace PacMan
                             {
                                 case "blinky":
                                     ghost.MoveBehaviour = new BlinkyChaseMode();
-                                    ghost.PerformMove(canvas.map, canvas);
+                                    if (timer_counter % 2 == 0)
+                                    {
+                                        ghost.PerformMove(canvas.map, canvas);
+                                    }
+                                   
                                     break;
                                 case "pinky":
                                     ghost.MoveBehaviour = new PinkyChaseMode();
