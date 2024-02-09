@@ -9,36 +9,18 @@ namespace Mapa
 {
     public class BlinkyChaseMode : IMoveBehaviour
     {
-        Search s;
-
         public void Move(Ghost ghost, Map map, Canvas c)
         {
-            s = new Search(map);
-            Node nodoInicial = s.grid[(int)ghost.x, (int)ghost.y];
-            Node nodoObjetivo = s.grid[map.pacman.X, map.pacman.Y];
+            Search search = new Search(map);
+            Node nodoInicial = search.grid[(int)ghost.x, (int)ghost.y];
+            Node nodoObjetivo = search.grid[map.pacman.X, map.pacman.Y];
+            
+            List<Node> camino = search.FindPath(nodoInicial, nodoObjetivo);
 
-            switch (ghost.direction)
-            {
-                case Ghost.Direction.Up:
-                    ghost.direction = Ghost.Direction.Down;
-                    break;
-                case Ghost.Direction.Down:
-                    ghost.direction = Ghost.Direction.Up;
-                    break;
-                case Ghost.Direction.Right:
-                    ghost.direction = Ghost.Direction.Left;
-                    break;
-                case Ghost.Direction.Left:
-                    ghost.direction = Ghost.Direction.Right;
-                    break;
-            }
-
-            List<Node> camino = s.FindPath(nodoInicial, nodoObjetivo);
-
-            if (camino != null && camino.Count > 1)
+            if (camino != null && camino.Count > 0)
             {
                 // Mover al fantasma al siguiente nodo en el camino, ignorando el primer nodo que es la posición actual del fantasma
-                Node siguienteNodo = camino[1];
+                Node siguienteNodo = camino.Count == 1 ? camino[0] : camino[1];
                 ghost.x = siguienteNodo.X;
                 ghost.y = siguienteNodo.Y;
             }
