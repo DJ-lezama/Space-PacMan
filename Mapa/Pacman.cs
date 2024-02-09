@@ -11,6 +11,7 @@ namespace PacMan
         public int Y { get; set; }
         public enum Direction { Up, Down, Left, Right }
         public Direction CurrentDirection { get; set; }
+        public Direction NextDirection { get; set; }
         public Boolean poweredUp;
         public Boolean isAlive;
         public int lives = 3;
@@ -28,6 +29,37 @@ namespace PacMan
         {
             int newX = X;
             int newY = Y;
+
+            if(CurrentDirection != NextDirection)
+            {
+                switch (NextDirection)
+                {
+                    case Direction.Left:
+                        if (map.IsPassable(X - 1, Y))
+                        {
+                            CurrentDirection = NextDirection;
+                        }
+                        break;
+                    case Direction.Right:
+                        if (map.IsPassable(X + 1, Y))
+                        {
+                            CurrentDirection = NextDirection;
+                        }
+                        break;
+                    case Direction.Up:
+                        if (map.IsPassable(X, Y - 1))
+                        {
+                            CurrentDirection = NextDirection;
+                        }
+                        break;
+                    case Direction.Down:
+                        if (map.IsPassable(X, Y + 1))
+                        {
+                            CurrentDirection = NextDirection;
+                        }
+                        break;
+                }
+            }
 
             switch (CurrentDirection)
             {
