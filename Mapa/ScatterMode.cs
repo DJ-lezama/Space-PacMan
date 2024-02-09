@@ -1,55 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using PacMan;
 
 namespace Mapa
 {
     public class ScatterMode : IMoveBehaviour
     {
-        public int scatterCounter;
-        public int scatterDuration;
+        private static int _scatterDuration;
         public int scatterModeHappenings = 0;
-        private char target;
+        private char _target;
 
         public void Move(Ghost ghost, Map map, Canvas c)
         {
-            // set duration to 7 sconds if Scatter mode hasn't happened more than once, otherwise set it to 5 seconds
-            scatterDuration = scatterModeHappenings < 2 ? 480 : 400;
+            // set duration to 7 seconds if Scatter mode hasn't happened more than once, otherwise set it to 5 seconds
+            _scatterDuration = scatterModeHappenings < 2 ? 40 : 30;
 
-            (int targetX, int targetY) = GetTarget(ghost, map);
+            var (targetX, targetY) = GetTarget(ghost, map);
             
-            if (scatterCounter < scatterDuration)
+            if (ghost.scatterCounter < _scatterDuration)
             {
                 RetreatToCorner(ghost, map, targetX, targetY);
-                scatterCounter++;
+                ghost.scatterCounter++;
             }
+            
             //Change from scatter mode if the counter is grater or equal than duration or the ghost has reached its target
-            else if (scatterCounter >= scatterDuration || (ghost.x == targetX && ghost.y == targetY))
+            else if (ghost.scatterCounter >= _scatterDuration || (ghost.x == targetX && ghost.y == targetY))
             {
-                scatterCounter = 0;
+                ghost.scatterCounter = 0;
                 ghost.CurrentMode = Ghost.GhostMode.Chase;
+                switch (ghost.Identifier)
+                {
+                    case "blinky":
+                        ghost.MoveBehaviour = new BlinkyChaseMode();
+                        break;
+                    case "pinky":
+                        ghost.MoveBehaviour = new PinkyChaseMode();
+                        break;
+                    case "inky":
+                        ghost.MoveBehaviour = new InkyChaseMode();
+                        break;
+                    case "clyde":
+                        ghost.MoveBehaviour = new ClydeChaseMode();
+                        break;
+                }
             }
         }
 
-        public (int, int) GetTarget(Ghost ghost, Map map)
+        private (int, int) GetTarget(Ghost ghost, Map map)
         {
             switch (ghost.Identifier)
             {
                 case "blinky":
-                    target = 'R';
+                    _target = 'R';
                     break;
                 case "pinky":
-                    target = 'K';
+                    _target = 'K';
                     break;
                 case "inky":
-                    target = 'I';
+                    _target = 'I';
                     break;
                 case "clyde":
-                    target = 'O';
+                    _target = 'O';
                     break;
             }
-            (int targetX, int targetY) = map.SearchTarget(target);
+            (int targetX, int targetY) = map.SearchTarget(_target);
             return (targetX, targetY);
         }
 

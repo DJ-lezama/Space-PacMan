@@ -6,6 +6,7 @@ namespace PacMan
 {
     public class Ghost
     {
+        public int scatterCounter;
         public Boolean isAlive;
         Random rand = new Random();
         public float x, y;
@@ -34,11 +35,11 @@ namespace PacMan
             this.x = x;
             this.y = y;
 
-            this.initialX = x;
-            this.initialY = y;
+            initialX = x;
+            initialY = y;
 
-            this.CurrentMode = GhostMode.Chase;
-            this.Identifier = identifier;
+            CurrentMode = GhostMode.Chase;
+            Identifier = identifier;
             direction = d;
         }
 

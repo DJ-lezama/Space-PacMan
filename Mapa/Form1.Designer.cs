@@ -1,4 +1,4 @@
-﻿namespace PacMan
+﻿namespace Mapa
 {
     partial class Form1
     {
