@@ -76,6 +76,21 @@ namespace PacMan
                     newY += 1;
                     break;
             }
+            
+            // Tunnel teleportation logic
+            if (newY == 12) // Assuming row 10 is where the tunnel is
+            {
+                // Left tunnel exit to right
+                if (newX < 0)
+                {
+                    newX = map.level.GetLength(1) - 1; // Teleport to the right side
+                }
+                // Right tunnel exit to left
+                else if (newX >= map.level.GetLength(1))
+                {
+                    newX = 0; // Teleport to the left side
+                }
+            }
 
             // Check if the new position is passable before moving.
             if (map.IsPassable(newX, newY))
