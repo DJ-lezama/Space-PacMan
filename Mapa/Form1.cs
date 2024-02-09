@@ -166,22 +166,32 @@ namespace PacMan
                             {
                                 case "blinky":
                                     ghost.MoveBehaviour = new BlinkyChaseMode();
-                                    if (_timerCounter % 6 == 0)
+                                    if (_timerCounter % 4 == 0)
                                     {
                                         ghost.PerformMove(canvas.map, canvas);
                                     }
                                     break;
                                 case "pinky":
                                     ghost.MoveBehaviour = new PinkyChaseMode();
-                                    ghost.PerformMove(canvas.map, canvas);
+                                    if (_timerCounter % 4 == 0)
+                                    {
+                                        ghost.PerformMove(canvas.map, canvas);
+                                    }
                                     break;
                                 case "inky":
                                     ghost.MoveBehaviour = new InkyChaseMode();
-                                    ghost.PerformMove(canvas.map, canvas);
+                                    if (_timerCounter % 4 == 0)
+                                    {
+                                        ghost.PerformMove(canvas.map, canvas);
+                                    }
                                     break;
                                 case "clyde":
                                     ghost.MoveBehaviour = new ClydeChaseMode();
-                                    ghost.PerformMove(canvas.map, canvas);
+                                    if (_timerCounter % 4 == 0)
+                                    {
+                                        
+                                        ghost.PerformMove(canvas.map, canvas);
+                                    }
                                     break;
                             }
                             break;

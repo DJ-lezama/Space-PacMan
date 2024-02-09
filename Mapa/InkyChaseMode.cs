@@ -62,6 +62,8 @@ namespace Mapa
                 ghost.x = siguienteNodo.X;
                 ghost.y = siguienteNodo.Y;
             }
+            
+            ghost.UpdateDirection((int)ghost.x, (int)ghost.y);
         }
     }
 }

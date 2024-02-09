@@ -120,6 +120,7 @@ namespace Mapa
                     int checkX = node.X + x;
                     int checkY = node.Y + y;
 
+                    
                     switch (ghost.Identifier)
                     {
                         case "blinky":
@@ -153,6 +154,8 @@ namespace Mapa
                             }
                             break;
                     }
+                    
+                    
                 }
             }
 
