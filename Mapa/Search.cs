@@ -110,7 +110,7 @@ namespace Mapa
                     int checkX = node.X + x;
                     int checkY = node.Y + y;
 
-                    if ((checkX >= 0 && checkX < grid.GetLength(1) && checkY >= 0 && checkY < grid.GetLength(0)) && grid[checkX,checkY].IsWall != true)
+                    if ((checkX >= 0 && checkX < grid.GetLength(1) && checkY >= 0 && checkY < grid.GetLength(0)) || grid[checkX,checkY].IsWall != true)
                     {
                         neighbours.Add(grid[checkX, checkY]);
                     }
