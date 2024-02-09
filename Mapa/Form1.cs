@@ -35,16 +35,16 @@ namespace PacMan
             switch (keyData)
             {
                 case Keys.Left:
-                    canvas.pacman.CurrentDirection = Pacman.Direction.Left;
+                    canvas.pacman.NextDirection = Pacman.Direction.Left;
                     break;
                 case Keys.Right:
-                    canvas.pacman.CurrentDirection = Pacman.Direction.Right;
+                    canvas.pacman.NextDirection = Pacman.Direction.Right;
                     break;
                 case Keys.Up:
-                    canvas.pacman.CurrentDirection = Pacman.Direction.Up;
+                    canvas.pacman.NextDirection = Pacman.Direction.Up;
                     break;
                 case Keys.Down:
-                    canvas.pacman.CurrentDirection = Pacman.Direction.Down;
+                    canvas.pacman.NextDirection = Pacman.Direction.Down;
                     break;
             }
 
