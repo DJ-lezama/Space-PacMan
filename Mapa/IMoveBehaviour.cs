@@ -4,6 +4,6 @@ namespace Mapa
 {
     public interface IMoveBehaviour
     {
-        void Move(Ghost ghost, Map map);
+        void Move(Ghost ghost, Map map, Canvas c);
     }
 }

@@ -42,9 +42,9 @@ namespace PacMan
             direction = d;
         }
 
-        public void PerformMove(Map map)
+        public void PerformMove(Map map, Canvas c)
         {
-            MoveBehaviour.Move(this, map);
+            MoveBehaviour.Move(this, map, c);
         }
         
         public void AnimGhost(Graphics g, int cntT, Brush ghostColor, Map map)
