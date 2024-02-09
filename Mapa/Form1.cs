@@ -14,6 +14,9 @@ namespace PacMan
         private Boolean gameOver;
         public int poweredUpDuration;
         public const int defaultDuration = 100;
+
+        private int scatterModeCooldown = 180;
+        private int lastScatterExitTime = -180;
         
         public Form1()
         {
@@ -190,7 +193,7 @@ namespace PacMan
 
         private void ScatterModeChecker()
         {
-            if (timer_counter != 0 && timer_counter % 480 == 0  && canvas.map.CountPillsLeft() > 20) 
+            if (timer_counter != 0 && timer_counter % 480 == 0  && canvas.map.CountPillsLeft() > 20 && (timer_counter - lastScatterExitTime) >= scatterModeCooldown) 
             {
                 // Change ghosts mode to Scatter mode
                 foreach (Ghost ghost in canvas.ghosts)
@@ -205,7 +208,15 @@ namespace PacMan
                         }
                     } 
                 }
+            } 
+            /*
+            else if (scatterCounter >= scatterDuration || (ghost.x == targetX && ghost.y == targetY))
+            {
+                scatterCounter = 0;
+                ghost.CurrentMode = Ghost.GhostMode.Chase;
+                lastScatterExitTime = timer_counter; // Update the time scatter mode was exited.
             }
+            */
         }
         
         private void timer1_Tick(object sender, EventArgs e)
