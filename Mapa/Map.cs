@@ -4,7 +4,7 @@ namespace PacMan
 {
     public class Map
     {
-        public char[,] level = new char[,] { };
+        public char[,] level =  { };
         public Pacman pacman;
         private Canvas canvas;
         public int Score { get; set; } = 0;
